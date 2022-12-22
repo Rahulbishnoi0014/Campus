@@ -1,0 +1,306 @@
+body {
+  /* background-color: rgb(236, 236, 236); */
+  background-color: #a5cff9;
+  background-image: linear-gradient(62deg, #a5cff9 0%, #E0C3FC 100%);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+}
+
+
+.navbar1 {
+  padding: 1% 10%;
+  position: relative;
+  /* background-color: rgb(236, 236, 236); */
+
+}
+
+.navInternal {
+  padding: 0%;
+}
+
+.navbar-title {
+  font-family: "Comforter", cursive;
+  color: rgb(3, 145, 150);
+  font-size: 2.4rem;
+}
+.navbar-title:hover {
+  text-decoration: none;
+  color: rgb(3, 145, 150);
+ 
+}
+
+.nav-link p{
+  
+  margin: 0px 10px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: rgb(3, 145, 150);
+  border-radius: 10px;
+  transition: 0.2s;
+
+}
+.nav-link p:hover{
+  
+  padding: 4px;
+  border: 2px solid rgb(3, 145, 150) ;
+
+}
+
+
+
+
+
+
+
+
+.page {
+    margin: 0;
+    /* background-color: rgb(236, 236, 236); */
+    
+    display: flex;
+    /* flex-wrap: wrap; */
+    padding: 10px;
+    justify-content: space-evenly;
+    position: relative;
+  
+  
+  }
+  
+  .left {
+    width: 20%;
+    height: max-content;
+    /* border-radius: 10px;
+    background-color: rgb(245, 215, 215); */
+
+    padding: 1rem;
+    position:absolute;
+    top: 10px;
+    left: 30px;
+
+
+  }
+
+
+  
+ .left .username{
+    font-size: 25px;
+    width: max-content;
+
+ }
+ .left .fullname{
+    font-size: 15px;
+    width: max-content;
+    
+
+ }
+
+ .left .box1{
+    padding: 10px;
+    /* border-radius: 10px;
+    background-color: rgb(234, 158, 216); */
+    
+ }
+
+ .box1 a{
+color: rgb(3, 145, 150);
+  width: 100%;
+  text-align: left;
+  margin: 0;
+
+  font-size: 1.3rem;
+
+
+ }
+ .box1 a:hover{
+  color: rgb(0, 0, 0);
+ }
+ .box1 p{
+  margin: 5px;
+ }
+  
+
+  .right {
+    width: 20%;
+    height: 500px;
+    
+    padding: 10px;
+
+    position:absolute;
+    top: 10px;
+    right: 30px;
+
+  }
+
+  .right p{
+    width: 100%;
+    height: max-content;
+    margin: 10px;
+  }
+  
+
+
+
+
+  .feed {
+    width: 50%;
+  
+  margin: 10px 60px 10px 60px;
+  
+  }
+  
+  .post {
+    height: max-content;
+    margin: 30px 10px;
+    padding: 10px;
+    color: black;
+
+    box-shadow: 0 0 7px 2px rgb(72, 72, 72);
+    /* background-color: pink; */
+    /* position: relative; */
+  
+  }
+
+  .postbody{
+    height: max-content;
+
+  }
+  .more{
+    display: none;
+ }
+  
+  .post .time{
+    text-align: right;
+    margin: 5px;
+    font-size: 12px;
+  }
+
+  .mainsubmit{
+    height: max-content;
+    margin: 10px;
+    padding: 10px;
+    /* background-color: rgb(137, 243, 137); */
+    /* background-image: linear-gradient(45deg ,rgb(3, 145, 150),rgb(88, 255, 88)); */
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 5px 2px rgb(3,145,150);
+  
+}
+
+  .mainsubmit h1{
+    font-size: 2rem;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    
+  }
+  .mainsubmit p{
+    font-size: 1.5rem;
+    
+    
+    
+  }
+
+  .mainsubmit textarea{
+    
+    resize: none;
+    border: 0px dashed rgba(3,145,150);
+    font-size: 1rem;
+    width: 100%;
+    height: 100px;
+    /* background-color: rgb(236, 235, 235); */
+    /* background-color: white; */
+    color: rgb(0, 0, 0);
+    /* border-radius: 20px; */
+    padding: 10px;
+  }
+  .mainsubmit textarea:focus{
+    outline: 0;
+  }
+
+  #charac-count{
+    font-size: 1rem;
+    text-align: right;
+    width: 100%;
+    margin: 0;
+    color: rgba(0, 0, 0, 0.5);
+    
+
+  }
+  
+  
+  .btnx{
+    width: 100%;
+    padding: 5px;
+    font-size: 1.2rem;
+    color: white;
+    background-color: rgba(3,145,150);
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .btnx:hover{
+    background-color: rgba(3,145,150, 0.626);
+
+
+  }
+
+
+
+
+
+
+  .bar{
+    margin-top: 10px;
+    display: flex;
+  }
+  
+  .bar img{
+    height: 40px;
+    margin: 0px 10px;
+    transition: 0.2s;
+    
+  }
+  .bar img:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+
+  }
+  .like{
+    margin-top: 5px;
+  font-size: 1.3rem;
+ 
+  
+  }
+  
+  .post h1 pre{
+    font-size: 1.7rem;
+    overflow-x: auto;
+    
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+
+
+  
+  .borc{
+    border-radius: 10px;
+    /* border: 2px solid rgba(255, 255, 255, 0); */
+    
+  }
+
+  
+
+  .bgc{
+    background-color: white;
+    color: black;
+  }
+
+
+.rgb,.fi{
+  color: rgb(3, 145, 150);
+}
+
+
+  

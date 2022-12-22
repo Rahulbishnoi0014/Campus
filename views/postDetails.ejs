@@ -1,0 +1,73 @@
+<%- include('partials/Header') %>
+
+  <div class="colour-gradient ">
+    
+    
+      <!-- <a style="width: max-content;" class="ibutton btn" href="/secrets">Secrets</a> -->
+      <div class="secretPageTop">
+        <h1 class="accountUser"><i class="fi fi-rr-user">  </i> <%=accountuser%></h1>
+          
+  
+  
+            
+  
+       
+  
+  
+       
+        </div>
+
+    
+    <div class="postdetails">
+      <% if(accountuser !== "Anonymous"){ %> 
+        <a class="btn ibutton " href="/submit" role="button">Submit a Secret</a>
+         <% } %> 
+
+      <% postData.secret.reverse().forEach(function(data){ %>
+        
+        <% var dateTime= data.postId.getTimestamp()%> 
+        
+         <p><%=dateTime.toLocaleDateString()%> - <%=dateTime.toLocaleTimeString()%></p>
+        
+        
+          <!-- if(accountuser !== "Anonymous"){ %> 
+          <a href="/delete/?user=<postData._id%>&item=<data.postId%>"><img class="deleteIcon" src="/images/delete.png" alt="delete icon"></a>
+        
+       }  -->
+
+      <h1 title="<%=dateTime.toLocaleDateString()%> - <%=dateTime.toLocaleTimeString()%>%>">
+
+        <% var txt=data.userSecretePost%> 
+                <% if(txt.length>100){%> 
+            <pre><%=txt.substring(0,100)%><span class="dots">....</span><span class="more"><%=txt.substring(100,500)%></span><span class="read readMore ">read more</span>
+                 <%}else{%><pre><%=txt%></a><%}%>
+                </pre></h1>
+     
+        <hr>
+      <% }) %>
+
+
+    </div>
+
+
+<div class="extraSpcae" style="height: 3rem;">
+
+</div>
+
+<script>
+  $(document).ready(function(){
+ $(".read").click(function(){
+    $(this).prev().toggle();
+    $(this).siblings('.dots').toggle();
+    if($(this).text()=='read more'){
+$(this).text('read less');
+    }
+    else{
+$(this).text('read more');
+    }
+ });
+});
+</script>
+  </div>
+  
+  <%- include('partials/Footer') %>

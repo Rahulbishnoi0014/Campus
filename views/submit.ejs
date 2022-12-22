@@ -1,0 +1,57 @@
+<%- include('partials/Header') %>
+
+  <div class="colour-gradient">
+<!-- using contact section clasees for making partion 2 boxes -->
+    <div class="contactSection">
+      <div class="contactSection1">
+        <br><br><br>
+        <h1 style="color:#022c2b; font-size: 5rem;">
+          Secrets!
+      
+      </h1>
+      
+          
+           <h1>
+            no need to hold...
+          </h1>
+
+      </div>
+      <div class="contactSection2" style="border: 5px solid #022c2b;">
+ 
+ <h2 style=" color: white; font-size: 3rem;">SHOUT FACELESS</h2>
+ <br>
+ <form action="/submit" method="POST">
+
+  <div class="form-group">
+ 
+    <textarea name="secret" placeholder="What's your secret?" id="submitTextArea" ></textarea>        
+
+ 
+    <!-- <input type="text" class="form-control text-center" name="secret" placeholder="What's your secret?"> -->
+  </div>
+ 
+  <button type="submit" class="btn ibutton">Submit</button>
+</form>
+
+      </div>
+
+  </div>
+
+
+<!-- 
+    <div class="contentPage ">
+      <h1 class="display-3">Secrets</h1>
+      <p class="secret-text">Don't keep your secrets, share them anonymously!</p>
+
+      <form action="/submit" method="POST">
+
+        <div class="form-group">
+          <input type="text" class="form-control text-center" name="secret" placeholder="What's your secret?">
+        </div>
+        <button type="submit" class="btn ibutton">Submit</button>
+      </form>
+
+    </div>
+  </div> -->
+  
+  <%- include('partials/Footer') %>

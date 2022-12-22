@@ -1,0 +1,283 @@
+<%- include('partials/Header') %>
+
+  <div class="">
+    <div class="userInfo centerFlexColumn">
+
+      <h1>HELLO, <%=firstname%>
+      </h1>
+
+      <h2>Your Account Information</h2>
+
+
+      <table id="infotable">
+        <tr>
+          <td>
+            <p>Username</p>
+          </td>
+          <td>
+            <p>:</p>
+          </td>
+
+          <td>
+            <p>
+              <%=username%>
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>First Name</p>
+          </td>
+          <td>
+            <p>:</p>
+          </td>
+
+          <td>
+            <p>
+              <%=firstname%>
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Last Name</p>
+          </td>
+          <td>
+            <p>:</p>
+          </td>
+
+          <td>
+            <p>
+              <%=lastName%>
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Gender</p>
+          </td>
+          <td>
+            <p>:</p>
+          </td>
+
+          <td>
+            <p>
+              <%=gender%>
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Email</p>
+          </td>
+          <td>
+            <p>:</p>
+          </td>
+
+          <td>
+            <p>
+              <%=email%>
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Phone no.</p>
+          </td>
+          <td>
+            <p>:</p>
+          </td>
+          <td>
+            <p>
+              <%=phone%>
+            </p>
+          </td>
+        </tr>
+        <tr >
+          <td>
+          <td></td>
+          </td>
+          <td> <img title="Edit" class="editclose" id="edit" onclick="change1()" src="/images/editicon.png"
+              alt="edit icon">
+          </td>
+        </tr>
+      </table>
+
+
+      <form id="editform" class="editform" action="/updateUserInfo" method="post" style="display:none;">
+        <table>
+          <tr>
+            <td>
+              <p>Username</p>
+            </td>
+            <td>
+              <p>:</p>
+            </td>
+            <td>
+              <p>
+                <%=username%>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>First Name</p>
+            </td>
+            <td>
+              <p>:</p>
+            </td>
+            <td><input id="firstname" name="firstName" type="text" placeholder="<%=firstname%>" value="<%=firstname%>">
+            </td>
+
+          </tr>
+          <tr>
+            <td>
+              <p>Last Name</p>
+            </td>
+            <td>
+              <p>:</p>
+            </td>
+
+
+            <td><input type="text" name="lastName" placeholder="<%=lastName%>" value="<%=lastName%>"></td>
+
+          </tr>
+          <tr>
+            <td>
+              <p>Gender</p>
+            </td>
+            <td>
+              <p>:</p>
+            </td>
+
+            <td>
+              <div class="radioInputs">
+
+                <select name="gender" id="gender" >
+                  <option style="display:none" value="<%=gender%>"></option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+
+                </select>
+            </td>
+
+          </tr>
+          <tr>
+            <td>
+              <p>Email</p>
+            </td>
+            <td>
+              <p>:</p>
+            </td>
+            <td> <input type="email" name="email" id="email" placeholder="<%=email%>" value="<%=email%>">
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>Phone no.</p>
+            </td>
+            <td>
+              <p>:</p>
+            </td>
+            <td> <input type="tel" placeholder="<%=phone%>" value="<%=phone%>" name="phone" maxlength="12"
+                minlength="10" />
+            </td>
+
+          </tr>
+
+          <tr>
+            <td>
+
+            </td>
+            <td></td>
+            <td>
+              <button class="btn ibutton" type="submit">SAVE</button>
+              <button class="btn ibutton" onclick="change2()" type="submit">Cancle</button>
+
+              
+
+            </td>
+          </tr>
+        </table>
+
+      </form>
+
+      <br><br>
+      <h2>My Secrets</h2>
+    </div>
+
+
+    <div class="postdetails">
+      <a class="btn ibutton " href="/submit" role="button">Submit a Secret</a>
+
+      <% userSecrets.reverse().forEach(function(data){ %>
+
+        <% var dateTime=data.postId.getTimestamp()%>
+
+          <p>
+            <%=dateTime.toLocaleDateString()%> - <%=dateTime.toLocaleTimeString()%>
+          </p>
+
+
+          <% if(username !=="Anonymous" ){ %>
+            <a href="/delete/?user=<%=userid%>&item=<%=data.postId%>&from=myaccount"><img title="Delete" class="deleteIcon" src="/images/trash.png" alt="delete icon"></a>
+
+            <% } %>
+              <h1 title="<%=dateTime.toLocaleDateString()%> - <%=dateTime.toLocaleTimeString()%>%>">
+
+                <% var txt=data.userSecretePost%> 
+                <% if(txt.length>100){%> 
+            <pre><%=txt.substring(0,100)%><span class="dots">....</span><span class="more"><%=txt.substring(100,500)%></span><span class="read readMore ">read more</span>
+                 <%}else{%><pre><%=txt%></a><%}%>
+                </pre></h1>
+                
+
+              
+
+              <hr>
+              <% }) %>
+
+
+    </div>
+
+    <br>
+  </div>
+
+  
+  <script>
+
+    function change1() {
+      document.getElementById('infotable').style.display = 'none';
+      document.getElementById('editform').style.display = 'block';
+      document.getElementById('close').style.display = 'block';
+      document.getElementById('edit').style.display = 'none';
+
+
+
+    }
+    function change2() {
+      document.getElementById('infotable').style.display = 'block';
+      document.getElementById('editform').style.display = 'none';
+      document.getElementById('close').style.display = 'none';
+      document.getElementById('edit').style.display = 'block';
+
+
+    }
+  </script>
+  <script>
+    $(document).ready(function(){
+   $(".read").click(function(){
+      $(this).prev().toggle();
+      $(this).siblings('.dots').toggle();
+      if($(this).text()=='read more'){
+	$(this).text('read less');
+      }
+      else{
+	$(this).text('read more');
+      }
+   });
+});
+</script>
+
+  <%- include('partials/Footer') %>
