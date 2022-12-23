@@ -1,5 +1,5 @@
 //jshint esversion:6
-require('dotenv').config();
+
 
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -573,6 +573,6 @@ app.post("/signin",
 
 
 
-app.listen(process.env.PORT || 3000, function () {
+app.listen(3000, function () {
     console.log("server started on port 3000");
 });
