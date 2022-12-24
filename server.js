@@ -83,8 +83,8 @@ passport.deserializeUser(function (id, done) {
 });
 
 passport.use(new GoogleStrategy({
-    clientID: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET,
+    clientID: "222587680060-1namhemubvem6makr1de38u4rqej04cg.apps.googleusercontent.com",
+    clientSecret: "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",
     // callbackURL: "http://localhost:3000/auth/google/secrets"
 
     // callbackURL: "https://morning-headland-46007.herokuapp.com/auth/google/secrets"
