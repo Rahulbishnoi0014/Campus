@@ -1,5 +1,5 @@
 //jshint esversion:6
-require('dotenv').config();
+
 
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -82,8 +82,8 @@ passport.deserializeUser(function (id, done) {
 });
 
 passport.use(new GoogleStrategy({
-    clientID: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET,
+    clientID: "222587680060-1namhemubvem6makr1de38u4rqej04cg.apps.googleusercontent.com",
+    clientSecret: "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",
     // callbackURL: "http://localhost:3000/auth/google/secrets"
 
     // callbackURL: "https://morning-headland-46007.herokuapp.com/auth/google/secrets"
@@ -573,6 +573,6 @@ app.post("/signin",
 
 
 
-app.listen(process.env.PORT || 3000, function () {
+app.listen(3000, function () {
     console.log("server started on port 3000");
 });
