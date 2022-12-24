@@ -36,12 +36,7 @@ app.use(passport.session());
 mongoose.connect(process.env.DB_key, { useNewUrlparser: true },()=>{
     console.log("connected to DATABASE SERVER");
 });
-// userDB", { useNewUrlparser: true });
-// mongoose.connect("mongodb://localhost:27017/userDB", { useNewUrlparser: true });
-// mongodb+srv://admin-rahul:@cluster0.nv2ihbl.mongodb.net/?retryWrites=true&w=majority
-// mongodb+srv://<username>:<password>@cluster0.q6yoqjl.mongodb.net/?retryWrites=true&w=majority
 
-// mongoose.set("useCreateIndex",true);
 const userSchema = new mongoose.Schema({
     lastupdate: Date,
     firstname: String,
