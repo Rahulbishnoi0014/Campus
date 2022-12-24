@@ -33,7 +33,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("mongodb+srv://rahul:1421@cluster0.q6yoqjl.mongodb.net/testDB", { useNewUrlparser: true },()=>{
+mongoose.connect(process.env.DB_key, { useNewUrlparser: true },()=>{
     console.log("connected to DATABASE SERVER");
 });
 // userDB", { useNewUrlparser: true });
@@ -83,8 +83,8 @@ passport.deserializeUser(function (id, done) {
 });
 
 passport.use(new GoogleStrategy({
-    clientID: "222587680060-1namhemubvem6makr1de38u4rqej04cg.apps.googleusercontent.com",
-    clientSecret: "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",
+    clientID: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
     // callbackURL: "http://localhost:3000/auth/google/secrets"
 
     // callbackURL: "https://morning-headland-46007.herokuapp.com/auth/google/secrets"
