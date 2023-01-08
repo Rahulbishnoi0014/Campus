@@ -237,11 +237,11 @@
         <div class="right stickybox2 borc bgc">
 
             <p class="rgb"><i class="fi fi-rr-arrow-trend-up"></i> <b>Trending #1</b></p>
-            <p id="a"></p>
+            <p id="x"></p>
             <p class="rgb"><i class="fi fi-rr-arrow-trend-up"></i> <b>Trending #2</b></p>
-            <p id="b"></p>
+            <p id="y"></p>
             <p class="rgb"><i class="fi fi-rr-arrow-trend-up"></i> <b>Trending #3</b></p>
-            <p id="c"></p>
+            <p id="z"></p>
         </div>
 
 
@@ -264,6 +264,10 @@
                 document.getElementById('a').innerText = data[0].text.substring(0, 50);
                 document.getElementById('b').innerText = data[1].text.substring(0, 50);
                 document.getElementById('c').innerText = data[2].text.substring(0, 50);
+
+                document.getElementById('x').innerText = data[0].text.substring(0, 50);
+                document.getElementById('y').innerText = data[1].text.substring(0, 50);
+                document.getElementById('z').innerText = data[2].text.substring(0, 50);
 
             };
             xhr.send();
