@@ -59,11 +59,11 @@ let uplaod = multer({
 })
 
 // upload to s3 function
-const uploadToS3 = (fileData,filename) => {
+const uploadToS3 = (fileData, filename) => {
     return new Promise((resolve, reject) => {
         const params = {
             Bucket: process.env.bucketName,
-            Key: filename+".jpg",
+            Key: filename + ".jpg",
             ContentType: 'image/jpg',
             Body: fileData
         }
@@ -86,7 +86,7 @@ const uploadToS3 = (fileData,filename) => {
 
 
 // mongoDB connection
-mongoose.connect(process.env.DB_key, { useNewUrlparser: true },()=>{
+mongoose.connect(process.env.DB_key, { useNewUrlparser: true }, () => {
     console.log("connected to DATABASE SERVER");
 });
 
@@ -98,20 +98,21 @@ const userSchema = new mongoose.Schema({
     firstname: String,
     lastName: String,
     username: String,
-    profilePic:String,
+    profilePic: String,
     gender: String,
     email: String,
     phone: Number,
     password: String,
     googleId: String,
     secret: Array,
-    likedPost:Array
+    likedPost: Array
 });
 
 const postSchema = new mongoose.Schema({
     _id: ObjectId,
     text: String,
     like: Number,
+    user: String
 
 
 
@@ -193,7 +194,7 @@ app.get("/", function (req, res) {
                     if (!err) {
 
 
-                        res.render("home", { accountuserdata, data,likedpost:accountuserdata.likedPost });
+                        res.render("home", { accountuserdata, data, likedpost: accountuserdata.likedPost });
 
 
                     } else {
@@ -224,7 +225,7 @@ app.get("/secrets", function (req, res) {
 
         var accountuser;
         var userid = req.session.passport.user;
-       
+
         User.find({ "secret": { $ne: null } }).sort({ "lastupdate": -1 }).exec(function (err, foundUser) {
             if (err) {
                 // console.log(err);
@@ -276,23 +277,23 @@ app.get("/myaccount", function (req, res) {
         var email = "";
         var phone = "";
         var gender = "";
-        var profilePic="";
+        var profilePic = "";
 
         var userid = req.session.passport.user;
         User.findOne({ _id: userid }, function (err, data) {
             // console.log(data);
             if (!err) {
 
-                    username = data.username,
+                username = data.username,
                     firstname = data.firstname,
                     lastName = data.lastName,
                     username = data.username;
-                    email = data.email,
+                email = data.email,
                     phone = data.phone,
                     gender = data.gender,
-                    profilePic=data.profilePic
+                    profilePic = data.profilePic
 
-                res.render("myaccount", { username, firstname, lastName, gender, email, phone, userid, userSecrets: data.secret,profilePic });
+                res.render("myaccount", { username, firstname, lastName, gender, email, phone, userid, userSecrets: data.secret, profilePic });
 
 
             }
@@ -414,25 +415,25 @@ app.get("/delete", function (req, res) {
 
         User.updateOne({ _id: ObjectId(requestedUser) }, { $pull: { secret: { postId: ObjectId(requestedPost) } } },
             { safe: true, multi: true }, (err) => {
-            if (!err) {
-            
-                Post.findByIdAndDelete(requestedPost, (err) => {
-                    
-                    if (!err) {
-                        console.log("deleted");
-                        res.redirect("/myaccount?sucess=true");
-                        
-                    }
-                    else {
-                        console.log(err);
-                    }
-                });
+                if (!err) {
 
+                    Post.findByIdAndDelete(requestedPost, (err) => {
+
+                        if (!err) {
+                            console.log("deleted");
+                            res.redirect("/myaccount?sucess=true");
+
+                        }
+                        else {
+                            console.log(err);
+                        }
+                    });
+
+                }
+                else {
+                    console.log(err);
+                }
             }
-            else {
-                console.log(err);
-            }
-        }
         );
 
         // User.findById(req.query.user, function (err, foundUser) {
@@ -471,7 +472,7 @@ app.post("/updateUserInfo", function (req, res) {
             gender: req.body.gender,
             email: req.body.email,
             phone: req.body.phone
-            
+
 
         }
 
@@ -494,18 +495,18 @@ app.post("/uploadProfilePic", uplaod.single("image"), (req, res) => {
 
     if (req.file) {
 
-        var userid=req.session.passport.user;
+        var userid = req.session.passport.user;
 
-        uploadToS3(req.file.buffer,userid).then((result) => {
-            User.updateOne({ _id: userid }, { $set: {profilePic:result.Location} }, { upsert: true }, function (err) {
+        uploadToS3(req.file.buffer, userid).then((result) => {
+            User.updateOne({ _id: userid }, { $set: { profilePic: result.Location } }, { upsert: true }, function (err) {
                 if (!err) {
-    
+
                     res.redirect("/myaccount?status=sucess");
-    
+
                 } else {
                     res.render("errorpage", { message: err });
                 }
-            
+
             })
         }).catch((err) => {
             console.log(err)
@@ -517,8 +518,9 @@ app.post("/uploadProfilePic", uplaod.single("image"), (req, res) => {
 app.post("/submit", function (req, res) {
     const submittedSecrete = {
         userSecretePost: String,
-        like:Number,
+        like: Number,
         postId: String
+
     }
     const fromto = "/" + req.query.from;
     const postid = ObjectId();
@@ -534,8 +536,8 @@ app.post("/submit", function (req, res) {
             if (foundUser) {
                 foundUser.lastupdate = new Date;
                 foundUser.secret.push(submittedSecrete);
-                Post.updateOne({ _id: postid }, { $set: {_id: postid, text: req.body.secret, like: 0 } }, { upsert: true }, (err) => {
-                    
+                Post.updateOne({ _id: postid }, { $set: { _id: postid, text: req.body.secret, like: 0, user: req.user.id } }, { upsert: true }, (err) => {
+
                     if (!err) {
                         console.log("trending")
                         res.redirect(fromto);
@@ -598,38 +600,78 @@ app.post("/signin",
 app.get("/like/:postid", function (req, res) {
     if (req.isAuthenticated()) {
 
-
+        var likecount = 0;
         const fromto = req.query.from;
-        Post.updateOne({ _id: req.params.postid}, { $inc: { like: 1 } }, { upsert: true },async function (err) {
+        Post.updateOne({ _id: req.params.postid }, { $inc: { like: 1 } }, { upsert: true }, async function (err) {
             if (!err) {
 
-                
+
 
                 // res.redirect(fromto);
-                Post.findById(req.params.postid,(err,data)=>{
-                    if(!err){
-                        res.send({like:data.like});
+                Post.findById(req.params.postid, (err, data) => {
+                    if (!err) {
+                        likecount = data.like;
+
+                        const user = data.user;
+                        res.send({ like: data.like });
+
+                        User.findOne({ _id: ObjectId(user) }, (err, founduser) => {
+
+
+                            if (err) {
+                                console.log(err);
+                            }
+                            else {
+                                founduser.secret.forEach(x => {
+                                    if (x.postId == req.params.postid) {
+
+                                        x.like = likecount;
+
+                                    }
+                                });                                
+                                
+
+                                founduser.markModified("secret");
+                                founduser.save(() => {
+                                    // console.log("likedone");
+                                });
+
+
+                            }
+
+
+
+
+
+
+                        });
+
+
                     }
-                    else{
+                    else {
                         res.redirect(fromto);
 
                     }
                 });
 
-                User.findById(req.session.passport.user, function (err,foundUser){
+                User.findById(req.session.passport.user, function (err, foundUser) {
                     if (err) {
                         res.render("errorpage", { message: err });
                     }
                     else {
                         if (foundUser) {
                             foundUser.likedPost.push(req.params.postid);
+
                             foundUser.save(function () {
-                                
+
                             });
                         }
                     }
                 });
-                
+
+
+
+
 
             } else {
                 res.render("errorpage", { message: err });
@@ -647,23 +689,58 @@ app.get("/dislike/:postid", function (req, res) {
 
 
         const fromto = req.query.from;
-        Post.updateOne({ _id: req.params.postid}, { $inc: { like: -1 } }, { upsert: true },async function (err) {
+        Post.updateOne({ _id: req.params.postid }, { $inc: { like: -1 } }, { upsert: true }, async function (err) {
             if (!err) {
 
-                
+
 
                 // res.redirect(fromto);
-                Post.findById(req.params.postid,(err,data)=>{
-                    if(!err){
-                        res.send({like:data.like});
+                Post.findById(req.params.postid, (err, data) => {
+                    if (!err) {
+                        likecount = data.like;
+
+                        const user = data.user;
+                        res.send({ like: data.like });
+
+                        User.findOne({ _id: ObjectId(user) }, (err, founduser) => {
+
+
+                            if (err) {
+                                console.log(err);
+                            }
+                            else {
+                                founduser.secret.forEach(x => {
+                                    if (x.postId == req.params.postid) {
+
+                                        x.like = likecount;
+
+                                    }
+                                });                                
+                                
+
+                                founduser.markModified("secret");
+                                founduser.save(() => {
+                                    // console.log("likedone");
+                                });
+
+
+                            }
+
+
+
+
+
+
+                        });
+
+
                     }
-                    else{
+                    else {
                         res.redirect(fromto);
 
                     }
                 });
-
-                User.findById(req.session.passport.user, function (err,foundUser){
+                User.findById(req.session.passport.user, function (err, foundUser) {
                     if (err) {
                         res.render("errorpage", { message: err });
                     }
@@ -671,12 +748,12 @@ app.get("/dislike/:postid", function (req, res) {
                         if (foundUser) {
                             foundUser.likedPost.pull(req.params.postid);
                             foundUser.save(function () {
-                                
+
                             });
                         }
                     }
                 });
-                
+
 
             } else {
                 res.render("errorpage", { message: err });
@@ -690,13 +767,13 @@ app.get("/dislike/:postid", function (req, res) {
 })
 
 
-app.get("/trend",(req,res)=>{
-    Post.find({}).sort({"like":-1}).exec(function (err,data){
-        if(!err){
-        
-            res.send(data.slice(0,10));
-        }else{
-            res.send({message:"NOT FOUND"});
+app.get("/trend", (req, res) => {
+    Post.find({}).sort({ "like": -1 }).exec(function (err, data) {
+        if (!err) {
+
+            res.send(data.slice(0, 10));
+        } else {
+            res.send({ message: "NOT FOUND" });
         }
     })
 });
@@ -706,6 +783,6 @@ app.get("/trend",(req,res)=>{
 // ----------
 
 
-    app.listen(process.env.PORT || 3000, function () {
-        console.log("server started on port 3000");
-    });
+app.listen(process.env.PORT || 3000, function () {
+    console.log("server started on port 3000");
+});

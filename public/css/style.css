@@ -581,16 +581,36 @@ font-size: 1.5rem;
 
 }
 
+#submitbtn1:disabled{
+  background-color: grey;
+  cursor:none;
+}
+
 .postdetails p {
   text-align: right;
+  font-size: 15px;
 
 }
 
 .postdetails h1 {
   background-color: rgb(7, 54, 46);
-  padding: 20px;
+  padding: 20px 20px 10px 20px;
   border-radius: 10px;
 }
+
+.postdetails h2 {
+  
+  font-size: 2rem;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  
+}
+.postdetails a {
+  background-color: rgb(7, 54, 46);
+ 
+  
+}
+
 
 .postdetails h1 pre {
   font-size: 1.5rem;

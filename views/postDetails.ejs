@@ -42,7 +42,15 @@
                 <% if(txt.length>100){%> 
             <pre><%=txt.substring(0,100)%><span class="dots">....</span><span class="more"><%=txt.substring(100,500)%></span><span class="read readMore ">read more</span>
                  <%}else{%><pre><%=txt%></a><%}%>
-                </pre></h1>
+                </pre>
+                <% if(data.like){ %>
+                  <p title="likes" style="font-size: 17px;"><img height="25" src="/images/redheart.png" alt="">
+                    <%=data.like%>
+                  </p>
+
+                  <% } %>
+              
+              </h1>
      
         <hr>
       <% }) %>
@@ -61,10 +69,10 @@
     $(this).prev().toggle();
     $(this).siblings('.dots').toggle();
     if($(this).text()=='read more'){
-$(this).text('read less');
+$(this).text('  read less');
     }
     else{
-$(this).text('read more');
+$(this).text(' read more');
     }
  });
 });

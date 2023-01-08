@@ -96,17 +96,16 @@ body {
 
 
 .page {
-    margin: 0;
-    /* background-color: rgb(236, 236, 236); */
-    
+    margin: 0;    
     display: flex;
-    /* flex-wrap: wrap; */
     padding: 10px;
     justify-content: space-evenly;
     position: relative;
   
   
   }
+
+ 
   
   .left {
     width: 20%;
@@ -184,10 +183,9 @@ color: rgb(3, 145, 150);
 
 
   .feed {
-    width: 50%;
-  
-  margin: 10px 60px 10px 60px;
-  
+    width: 50%; 
+   margin: 10px 60px 10px 60px;
+
   }
   
   .post {
@@ -262,7 +260,7 @@ color: rgb(3, 145, 150);
   .mainsubmit textarea{
     
     resize: none;
-    border: 0px dashed rgba(3,145,150);
+    border: 0px dashed rgb(3, 145, 150);
     font-size: 1rem;
     width: 100%;
     height: 100px;
@@ -292,7 +290,7 @@ color: rgb(3, 145, 150);
     padding: 5px;
     font-size: 1.2rem;
     color: white;
-    background-color: rgba(3,145,150);
+    background-color: #039196;
     border: 0;
     border-radius: 5px;
     cursor: pointer;
@@ -339,12 +337,137 @@ color: rgb(3, 145, 150);
     word-wrap: break-word;
   }
 
+  .circlebtn{
+    display: none;
+  }
+
+  @media (max-width:1028px) {
+    .page{
+      display: block;
+      justify-content:center;
+      margin: 0px;
+      /* padding: 10px; */
+    
+    }
+
+    .circlebtn{
+      display: block;
+    }
+    .circlebtn .parent{
+        display: flex;
+        justify-content: space-evenly;
+    }
+    .circlebtn .child{
+      padding: 10px;
+  }
+    .circle{
+      height: 100px;
+      width: 100px;
+    }
+
+    .trendbox,.profilebox{
+      width: 100%;
+      margin: 20px 0px;
+      font-size: 2.5rem;
+      padding: 20px;
+    }
+
+    .profilebox h1{
+      font-size: 3rem;
+    }
+    .profilebox img{
+      height: 200px;
+      width: 200px;
+      float: right;
+      margin: 10px 25px 0px 10px;
+    }
+    .profilebox p{
+      font-size: 2.5rem;
+    }
+    
+    
+    .left,.right{
+      display: none;
+    }
+    
+    .feed{
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      width: 100%;
+      margin: 0px ;
+      height: 100vh;
+   overflow-y: scroll;
+   -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none; 
+
+   text-align: justify;
+  
+  }
+
+  .feed::-webkit-scrollbar{
+    display: none;
+  }
+  
+    .post, .mainsubmit{
+      width: 100%;
+      margin: 40px 10px;
+    }
+    
+    .postbody{
+      height: max-content;
+      width: 100%;
+    
+    }
+    
+    
+    .post .time{
+      font-size: 30px;
+    }
+    
+    .post .postuser,.btnx{
+      font-size: 3rem;
+
+    }
+    .post h1 pre,.mainsubmit h1,.mainsubmit p{
+      font-size: 3.5rem;
+    }
+    
+  
+    .mainsubmit textarea{
+      font-size: 3rem;
+      height: 300px;
+      
+    }
+    #charac-count{
+      font-size: 2rem;
+     
+    }
+  
+    .bar img{
+      height: 70px;
+      
+    }
+    .like{
+      margin-top: 0px;
+    font-size: 3rem;
+   
+    
+    }
+    
+    
+    
+    
+    
+    
+    
+      }
+    
 
 
   
   .borc{
     border-radius: 10px;
-    /* border: 2px solid rgba(255, 255, 255, 0); */
     
   }
 
@@ -416,3 +539,4 @@ color: rgb(3, 145, 150);
   transform: rotate(90deg);
   transition: 0.5s;
 }
+

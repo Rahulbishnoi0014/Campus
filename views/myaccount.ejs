@@ -9,29 +9,29 @@
       <div class="profileImgSec">
 
 
-        
+
 
         <% if(profilePic){%>
           <img title="edit image" class="editProfileImage" src="<%=profilePic%>" alt="profile img">
-         
+
 
           <% }else{ %>
-            <img src="/images/user.png" alt="no img">
-            <% } %> 
+            <img class="editProfileImage" src="/images/user.png" alt="no img">
+            <% } %>
 
-            <p class="editimg">CLICK TO EDIT</p>
-        <div class="profileForm">
-          <form id="picform" action="/uploadProfilePic" method="post" enctype="multipart/form-data">
+              <p class="editimg">CLICK TO EDIT</p>
+              <div class="profileForm">
+                <form id="picform" action="/uploadProfilePic" method="post" enctype="multipart/form-data">
 
-            <label for="image">Upload profile picture</label>
-            <input type="file" id="image" name="image" placeholder="select Image">
-            <button class="btn ibutton" type="submit">upload</button>
-  
-        </form>
-        </div>
+                  <label for="image">Upload profile picture</label>
+                  <input type="file" id="image" name="image" placeholder="select Image">
+                  <button class="btn ibutton" type="submit">upload</button>
 
-        
-      
+                </form>
+              </div>
+
+
+
 
       </div>
 
@@ -47,7 +47,7 @@
             <td>
               <p>:</p>
             </td>
-  
+
             <td>
               <p>
                 <%=username%>
@@ -61,7 +61,7 @@
             <td>
               <p>:</p>
             </td>
-  
+
             <td>
               <p>
                 <%=firstname%>
@@ -75,7 +75,7 @@
             <td>
               <p>:</p>
             </td>
-  
+
             <td>
               <p>
                 <%=lastName%>
@@ -89,7 +89,7 @@
             <td>
               <p>:</p>
             </td>
-  
+
             <td>
               <p>
                 <%=gender%>
@@ -103,7 +103,7 @@
             <td>
               <p>:</p>
             </td>
-  
+
             <td>
               <p>
                 <%=email%>
@@ -123,7 +123,7 @@
               </p>
             </td>
           </tr>
-          <tr >
+          <tr>
             <td>
             <td></td>
             </td>
@@ -132,9 +132,9 @@
             </td>
           </tr>
         </table>
-  
-  
-        <form id="editform" class="editform"  action="/updateUserInfo" method="post" style="display:none;">
+
+
+        <form id="editform" class="editform" action="/updateUserInfo" method="post" style="display:none;">
           <table>
             <tr>
               <td>
@@ -156,9 +156,10 @@
               <td>
                 <p>:</p>
               </td>
-              <td><input id="firstname" name="firstName" type="text" placeholder="<%=firstname%>" value="<%=firstname%>">
+              <td><input id="firstname" name="firstName" type="text" placeholder="<%=firstname%>"
+                  value="<%=firstname%>">
               </td>
-  
+
             </tr>
             <tr>
               <td>
@@ -167,10 +168,10 @@
               <td>
                 <p>:</p>
               </td>
-  
-  
+
+
               <td><input type="text" name="lastName" placeholder="<%=lastName%>" value="<%=lastName%>"></td>
-  
+
             </tr>
             <tr>
               <td>
@@ -179,19 +180,19 @@
               <td>
                 <p>:</p>
               </td>
-  
+
               <td>
                 <div class="radioInputs">
-  
-                  <select name="gender" id="gender" >
+
+                  <select name="gender" id="gender">
                     <option style="display:none" value="<%=gender%>"></option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                     <option value="other">Other</option>
-  
+
                   </select>
               </td>
-  
+
             </tr>
             <tr>
               <td>
@@ -213,65 +214,29 @@
               <td> <input type="tel" placeholder="<%=phone%>" value="<%=phone%>" name="phone" maxlength="12"
                   minlength="10" />
               </td>
-  
+
             </tr>
-           
+
             <tr>
               <td>
-  
+
               </td>
               <td></td>
               <td>
                 <button class="btn ibutton" type="submit">SAVE</button>
                 <button class="btn ibutton" onclick="change2()" type="submit">Cancle</button>
-  
-                
-  
+
+
+
               </td>
             </tr>
           </table>
-  
+
         </form>
 
       </div>
 
-      <script>
-        $(document).ready(()=>{
 
-          $(".profileForm").hide();
-          $(".editimg").hide();
-          $(".userinfoforms").hide();
-
-          $(".editProfileImage").click(()=>{
-            $(".profileForm").toggle(500);
-            
-          });
-          $(".editProfileImage").hover(()=>{
-            $(".editimg").slideToggle(400);
-
-          });
-
-
-          $("#arrow").click(()=>{
-            $(".userinfoforms").toggle(400);
-            $("#arrow").toggleClass("rotate90");
-
-
-          });
-
-
-
-
-
-
-
-
-        })
-
-
-
-        
-      </script>
 
 
 
@@ -282,7 +247,33 @@
 
 
     <div class="postdetails">
-      <a class="btn ibutton " href="/submit" role="button">Submit a Secret</a>
+      <a id="submitbtn" class="btn ibutton" role="button">Submit a Secret</a>
+
+      <div class="mainsubmit">
+        <h2>Create Post</h2>
+        <hr>
+        <form id="submitform" style="margin: 0; padding:0;" action="/submit?from=myaccount" method="post">
+          <textarea id="inputarea" name="secret" placeholder="What for today ?" required maxlength="500"></textarea>
+          <br>
+          <p id="charac-count">0/500</p>
+          <button  id="submitbtn1" type="submit" class="btnx">POST</button>
+        </form>
+
+        <script>
+          document.querySelector("#submitform").addEventListener("submit", async function (event) {
+            const button = event.target.querySelector("#submitbtn1");
+            button.setAttribute("disabled", true);
+
+          });
+
+        </script>
+
+      </div>
+
+
+      <br><br>
+
+
 
       <% userSecrets.reverse().forEach(function(data){ %>
 
@@ -294,30 +285,80 @@
 
 
           <% if(username !=="Anonymous" ){ %>
-            <a href="/delete/?user=<%=userid%>&item=<%=data.postId%>&from=myaccount"><img title="Delete" class="deleteIcon" src="/images/trash.png" alt="delete icon"></a>
+            <a href="/delete/?user=<%=userid%>&item=<%=data.postId%>&from=myaccount"><img title="Delete"
+                class="deleteIcon" src="/images/trash.png" alt="delete icon"></a>
 
             <% } %>
               <h1 title="<%=dateTime.toLocaleDateString()%> - <%=dateTime.toLocaleTimeString()%>%>">
 
-                <% var txt=data.userSecretePost%> 
-                <% if(txt.length>100){%> 
-            <pre><%=txt.substring(0,100)%><span class="dots">....</span><span class="more"><%=txt.substring(100,500)%></span><span class="read readMore ">read more</span>
+                <% var txt=data.userSecretePost%>
+                  <% if(txt.length>100){%>
+                    <pre><%=txt.substring(0,100)%><span class="dots">....</span><span class="more"><%=txt.substring(100,500)%></span><span class="read readMore ">read more</span>
                  <%}else{%><pre><%=txt%></a><%}%>
-                </pre></h1>
-                
+                </pre>
 
-              
+                    <% if(data.like){ %>
+                      <p title="likes" style="font-size: 17px;"><img height="25" src="/images/redheart.png" alt="">
+                        <%=data.like%>
+                      </p>
+
+                      <% } %>
+
+              </h1>
 
               <hr>
               <% }) %>
-
 
     </div>
 
     <br>
   </div>
 
-  
+  <script>
+    $(document).ready(() => {
+
+      $(".profileForm").hide();
+      $(".editimg").hide();
+      $(".userinfoforms").hide();
+      $(".mainsubmit").hide();
+
+      $(".editProfileImage").click(() => {
+        $(".profileForm").toggle(500);
+
+      });
+      $(".editProfileImage").hover(() => {
+        $(".editimg").slideToggle(400);
+
+      });
+
+      $("#submitbtn").click(() => {
+        $(".mainsubmit").toggle(300);
+
+      });
+
+
+
+
+      $("#arrow").click(() => {
+        $(".userinfoforms").toggle(400);
+        $("#arrow").toggleClass("rotate90");
+
+
+      });
+
+
+
+
+
+
+
+
+    })
+
+
+
+
+  </script>
   <script>
 
     function change1() {
@@ -339,18 +380,18 @@
     }
   </script>
   <script>
-    $(document).ready(function(){
-   $(".read").click(function(){
-      $(this).prev().toggle();
-      $(this).siblings('.dots').toggle();
-      if($(this).text()=='read more'){
-	$(this).text('read less');
-      }
-      else{
-	$(this).text('read more');
-      }
-   });
-});
-</script>
+    $(document).ready(function () {
+      $(".read").click(function () {
+        $(this).prev().toggle();
+        $(this).siblings('.dots').toggle();
+        if ($(this).text() == 'read more') {
+          $(this).text(' read less');
+        }
+        else {
+          $(this).text(' read more');
+        }
+      });
+    });
+  </script>
 
   <%- include('partials/Footer') %>

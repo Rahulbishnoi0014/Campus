@@ -1,7 +1,7 @@
 <%- include('partials/Header') %>
 
 
-    <div class="page ">
+    <div class="page">
 
 
         <!-- <a style="width: max-content;" class="ibutton btn" href="/secrets">Secrets</a> -->
@@ -38,10 +38,8 @@
                             <p>
                                 <%=accountuserdata.phone%>
                             </p>
-                            <!-- <p><i class="fi fi-rr-envelope"></i> <b>E-mail</b></p>
-        <p><%=accountuserdata.email%></p> -->
-
-
+                           
+<br>
                             <a class="btn" href="/" role="button">Home</a>
                             <!-- <a class="btn" href="/myaccount" role="button">My Account</a> -->
                             <a class="btn" href="/logout" role="button">Sign Out</a>
@@ -52,9 +50,88 @@
         </div>
 
 
+        <div class="circlebtn" >
+            <div class="parent">
+                <img class="circle trendbtn" src="/images/trend.png" alt="trending">
+                <img class="circle profilebtn" src="/images/account.png" alt="profile">
 
+            
+            </div>
+            <div class="child">
+                <div class="trendbox  borc bgc">
+
+                    <p class="rgb"><i class="fi fi-rr-arrow-trend-up"></i> <b>Trending #1</b></p>
+                    <p id="a"></p>
+                    <p class="rgb"><i class="fi fi-rr-arrow-trend-up"></i> <b>Trending #2</b></p>
+                    <p id="b"></p>
+                    <p class="rgb"><i class="fi fi-rr-arrow-trend-up"></i> <b>Trending #3</b></p>
+                    <p id="c"></p>
+                </div>
+
+                <div class="profilebox stickybox1 borc bgc">
+
+
+                    <% if(!accountuserdata.profilePic){ %>
+                        <a href="/myaccount"><img class="profileImage" src="/images/user.png" alt="profileIMG"></a>
+                        <% }else{ %>
+                            <a href="/myaccount"><img class="profileImage" src="<%=accountuserdata.profilePic%>"
+                                    alt="profileIMG"></a>
+                            <% } %>
+        
+        
+                                <br>
+                                
+                                <h1 class="username">  @<%=accountuserdata.username%>
+                                </h1>
+                                <p class="fullname"><i class="fi fi-rr-user"></i><%=accountuserdata.firstname%> <%=accountuserdata.lastName%>
+                                </p>
+        
+                                <div class="box1">
+                                    <p><i class="fi fi-rr-paper-plane"></i> <b>Total posts</b></p>
+                                    <p>
+                                        <%=accountuserdata.secret.length%>
+                                    </p>
+                                    <p><i class="fi fi-rr-info"></i> <b>Full Name</b></p>
+                                    <p>
+                                        <%=accountuserdata.firstname%>
+                                            <%=accountuserdata.lastName%>
+                                    </p>
+                                    <p><i class="fi fi-rr-phone-call"></i> <b>Phone</b></p>
+                                    <p>
+                                        <%=accountuserdata.phone%>
+                                    </p>
+
+                                </div>
+        
+        
+                </div>
+        
+
+            </div>
+            
+</div>
 
         <div class="feed">
+  
+            
+            <Script>
+                $(document).ready(()=>{
+                    
+                    $(".trendbox").hide();
+                    $(".profilebox").hide();
+                    
+                    $(".trendbtn").click(()=>{
+                        $('.profilebox').slideUp(300);
+                        $('.trendbox').slideToggle(300);
+                    });
+
+                    $(".profilebtn").click(()=>{
+                        $('.trendbox').slideUp(300);
+                        $('.profilebox').slideToggle(300);
+                    })
+
+                })
+            </Script>
 
 
 
@@ -65,15 +142,24 @@
                             <%=accountuserdata.lastName%>
                     </b></p>
                 <hr class="rgb">
-                <form style="margin: 0; padding:0;" action="/submit?from=" method="post">
+                <form id="submitform" style="margin: 0; padding:0;" action="/submit?from=" method="post">
                     <textarea id="inputarea" name="secret" placeholder="What for today ?" required
                         maxlength="500"></textarea>
                     <br>
                     <p id="charac-count">0/500</p>
-                    <button type="submit" class="btnx">POST</button>
+                    <button id="submitbtn1" type="submit" class="btnx">POST</button>
                 </form>
 
             </div>
+
+            <script>
+                document.querySelector("#submitform").addEventListener("submit", async function (event) {
+                  const button = event.target.querySelector("#submitbtn1");
+                  button.setAttribute("disabled", true);
+      
+                });
+      
+              </script>
 
             <% var count=0; %>
                 <% data.reverse().forEach(function(x){ %>
@@ -108,7 +194,7 @@
                             <% if(likedpost.includes(x._id)){%>
                                 <img id='<%=count%>red' src="/images/redheart.png"
                                     onclick="dislike('<%=x._id%>','<%=count%>')" alt="like">
-                                    
+
                                 <img id='<%=count%>nred' src="/images/heartnew.png" style="display: none;"
                                     onclick="like('<%=x._id%>','<%=count%>')" alt="like">
 
@@ -121,7 +207,7 @@
 
                                     <% } %>
 
-                                    
+
 
 
 
@@ -139,7 +225,7 @@
 
                     </div>
 
-                    <% })%>
+                <% })%>
 
 
 
@@ -163,6 +249,7 @@
 
     </div>
 
+    
 
 
     <script>
@@ -188,19 +275,17 @@
 
         function like(x, y) {
 
-            
-document.getElementById(y+"red").style.display="block";
-            document.getElementById(y+"nred").style.display="none";
-                
+
+            document.getElementById(y + "red").style.display = "block";
+            document.getElementById(y + "nred").style.display = "none";
+
+
             const xhr = new XMLHttpRequest();
             var url = "/like/" + x;
             xhr.open('GET', url);
             xhr.onload = () => {
                 const like = JSON.parse(xhr.response);
                 document.getElementById(y).innerText = like.like;
-
-                
-
 
             };
 
@@ -209,10 +294,11 @@ document.getElementById(y+"red").style.display="block";
         }
 
         function dislike(x, y) {
+
+            document.getElementById(y + "red").style.display = "none";
+            document.getElementById(y + "nred").style.display = "block";
             
-            document.getElementById(y+"red").style.display="none";
-            document.getElementById(y+"nred").style.display="block";
-                
+
 
             const xhr = new XMLHttpRequest();
             var url = "/dislike/" + x;
@@ -220,8 +306,8 @@ document.getElementById(y+"red").style.display="block";
             xhr.onload = () => {
                 const like = JSON.parse(xhr.response);
                 document.getElementById(y).innerText = like.like;
-                
-                
+
+
 
             };
 
