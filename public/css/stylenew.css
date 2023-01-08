@@ -50,6 +50,46 @@ body {
 
 
 
+@media (max-width:1028px) {
+
+
+  .navbar1 {
+    size: 3rem;
+  }
+
+  .navbar-title{
+    font-size: 6rem;
+  }
+
+  .navbut {
+    height: 6rem;
+    width: 6rem;
+    background-color: rgb(3, 145, 150,0.5);
+    border-radius: 10px;
+    padding: 0;
+    border: 0px;
+    outline: none;
+    transition: 0.5s;
+  }
+  
+
+  .navbar1 button:focus{
+    border: 0;
+    outline: none;
+  }
+
+
+  .nav-link p{
+    font-size: 3rem;
+  }
+
+  
+
+
+
+}
+
+
 
 
 
@@ -121,7 +161,7 @@ color: rgb(3, 145, 150);
  }
   
 
-  .right {
+.right {
     width: 20%;
     height: 500px;
     
@@ -131,7 +171,7 @@ color: rgb(3, 145, 150);
     top: 10px;
     right: 30px;
 
-  }
+}
 
   .right p{
     width: 100%;
@@ -169,14 +209,32 @@ color: rgb(3, 145, 150);
   .more{
     display: none;
  }
-  
-  .post .time{
-    text-align: right;
+  .post hr{
     margin: 5px;
-    font-size: 12px;
+  }
+  .post .time{
+    
+    text-align: right;
+    margin: 0px;
+    font-size: 10px;
   }
 
-  .mainsubmit{
+  .post .postuser{
+    font-size: 1.5rem;
+  /* font-family: 'Quicksand', sans-serif; */
+  margin: 0;
+  color: rgb(3, 145, 150);
+  /* font-weight: 600; */
+  /* color: rgb(144, 247, 226); */
+
+}
+
+
+
+
+
+
+.mainsubmit{
     height: max-content;
     margin: 10px;
     padding: 10px;
@@ -184,7 +242,7 @@ color: rgb(3, 145, 150);
     /* background-image: linear-gradient(45deg ,rgb(3, 145, 150),rgb(88, 255, 88)); */
     background-color: white;
     border-radius: 10px;
-    box-shadow: 0 0 5px 2px rgb(3,145,150);
+    box-shadow: 0 0 5px 2px #039196;
   
 }
 
@@ -303,4 +361,58 @@ color: rgb(3, 145, 150);
 }
 
 
+.visible{
+  height: 20px;
+}
+.visible:active{
+  background-color: rgb(3,145,150);
+  border-radius: 20px;
+}
+
+
+
+.profileImgSec{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+}
+
+.profileForm input{
+  background-color: rgba(255, 255, 255, 0.47);
+  border-radius: 0;
   
+  
+}
+.profileForm label{
+  color: #039196;
+}
+.profileForm .ibutton{
+  font-size: 1rem;
+  width: max-content;
+  padding: 10px;
+}
+
+
+
+.profileImage{
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+}
+.editProfileImage{
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+}
+
+#arrow{
+  height: 2rem;
+  transition: 0.5s;
+}
+
+.rotate90{
+  transform: rotate(90deg);
+  transition: 0.5s;
+}

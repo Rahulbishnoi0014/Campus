@@ -1,163 +1,194 @@
-<%- include('partials/Header') %>
+<%- include('partials/Header2') %>
+
+
+
+
 
   <div class="centerFlexColumn logregs colour-gradientold ">
 
-<!-- testimonial section -->
-<section id="testimonials">
-
-
-
-  <div id="testimonial1" class="carousel slide" data-ride="carousel" data-interval="4000">
-    <div class="carousel-inner">
-      <div class="carousel-item">
-        <p class="pline">CAMPUS provides a platform, So that every one can share everything anonymously.</p>
-        <!-- <img class="pimg"src="images/backpack.png" alt="pic student"> -->
-      </div>
-      <div class="carousel-item">
-        <p class="pline">Shout faceless, Nameless. No need to show name just show your words.</p>
-        <!-- <img class="pimg" src="images/student.png" alt="pic student"> -->
-
-      </div>
-      <div class="carousel-item">
-        <p class="pline">Share your gossips, your ideas, your confession what ever you want.</p>
-        <!-- <img class="pimg" src="images/books.png" alt="pic student"> -->
-      </div>
-      <div class="carousel-item">
-        <p class="pline">Share is secure, with google security and hash algorithms.</p>
-        <!-- <img class="pimg" src="images/books.png" alt="pic student"> -->
-      </div>
-      <div class="carousel-item active">
-        <p class="pline">Everything you share is shown as Anonymous person's post, So we called them SECRET.</p>
-        <!-- <img class="pimg" src="images/books.png" alt="pic student"> -->
-      </div>
-
-
-
-
-    </div>
-
-    <a class="carousel-control-prev testbut" href="#testimonial1" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon"></span>
-
-    </a>
-    <a class="carousel-control-next testbut" href="#testimonial1" role="button" data-slide="next">
-      <span class="carousel-control-next-icon"></span>
-
-    </a>
-  </div>
-
-
-
-
-
-
-</section>
-
+    <br><br><br>
+    
 
     <div class="signupbody" id="signupbody">
 
-        <div class="loginCard ">
+      <div class="loginCard ">
 
-          <form class="form" action="/signup" method="post">
-            
-            <div class="heading">
-              <h1>Create a new account</h1>
-              <p>It's quick and easy.</p>
+        <form class="form" action="/signup" method="post">
+
+          <div class="heading">
+            <h1>Create a new account</h1>
+            <p>It's quick and easy.</p>
+          </div>
+
+          <div class="categories">
+            <div class="formbox">
+              <label class="formLabels" for="firstname">
+                <p>Personal Information</p>
+              </label>
+              <input id="firstname" type="text" placeholder="First Name" name="firstName" required />
+              <input type="text" placeholder="Last Name" name="lastName" />
+
+
+
+              <select name="gender" id="gender" required>
+                <option style="display:none">GENDER</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+
+              </select>
+
+
+              <br>
+              <!-- <label class="formLabels" for="email"><p>contact Information</p></label> -->
+              <input type="email" name="email" id="email" placeholder="Email" required>
+              <input type="tel" placeholder="Phone no." name="phone" maxlength="12" minlength="10" />
             </div>
 
-                <div class="categories">
-                  <div class="formbox">
-                    <label class="formLabels" for="firstname"><p>Personal Information</p></label>
-                  <input id="firstname" type="text" placeholder="First Name" name="firstName" required />
-                  <input type="text" placeholder="Last Name" name="lastName"/>
-                 
-        
-                  
-                    <select name="gender" id="gender" required>
-                      <option style="display:none">GENDER</option>
-                      <option value="male">Male</option>
-                      <option value="female">Female</option>
-                      <option value="other">Other</option>
-  
-                    </select>
-                 
-  
-  <br>
-                  <!-- <label class="formLabels" for="email"><p>contact Information</p></label> -->
-                  <input type="email" name="email" id="email" placeholder="Email" required>
-                  <input type="tel" placeholder="Phone no." name="phone" maxlength="12" minlength="10" />
-                  </div>
-  
-  
-                    <div class="formbox">
-     <label class="formLabels" for="username"><p>Login credentials</p></label>
-                  <p style="font-size:20px;">( Cannot be changed futher )</p>
-                 
-                  <% if(errortext==="exist" ){ %>
-                    <p class="errortext">Username already exist ,try another one.</p>
-                    <% } %>
-  
+
+            <div class="formbox">
+              <label class="formLabels" for="username">
+                <p>Login credentials</p>
+              </label>
+              <p style="font-size:20px;">( Cannot be changed futher )</p>
+
+              <% if(errortext==="exist" ){ %>
+                <p class="errortext">Username already exist ,try another one.</p>
+                <% } %>
+
                   <input id="username" type="text" placeholder="Username" name="username" maxlength="13" minlength="3"
                     required />
-                  <input type="password" placeholder="Password" name="password" required />
-  
-                    </div>
-                 
-                </div>
+                  <input id="pass" type="password" placeholder="Password" name="password" required />
+                  <input style="width: max-content;float: left;margin: 7px 10px;" id="visi" type="checkbox"
+                    onclick="visible()"><label for="visi">Show Password</label>
+                  <script>
+                    function visible() {
+                      var x = document.getElementById("pass");
+                      if (x.type === "password") {
+                        x.type = "text";
+                      } else {
+                        x.type = "password";
+                      }
+                    }
+                  </script>
+
+
+            </div>
+            <p>Already have an account ! <a href="/signin">sign in </a></p>
+
+
+          </div>
+
+
+          <div class="radioInputs">
+            <input type="checkbox" name="terms" id="terms" onchange="myfun()">
+            <label for="terms">
+              <p>I agree to all <a href="/docs/CAMPUS.pdf" download>terms and conditions.</a></p>
+            </label>
+          </div>
+
+
+          
+
+          <p id="statement">Agree T&C to create Account</p>
+
+
+          <div id="boxx" style="visibility:hidden; display: flex;justify-content: center;align-items: center;">
+            <button class="ibutton" type="submit" id="button1">Sign Up</button>
+
+            <hr class="hr2">
+
+            <a  id="button2" class="ibutton btn-social btn-google" href="/auth/google" role="button">
+              <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" height="25" alt="google">
+              Google
+            </a>
+          </div>
+
+        </form>
+
+      </div>
 
 
 
-                <hr class="hr2">
-                <div class="radioInputs">
-                  <input type="checkbox" name="terms" id="terms" onchange="myfun()">
-                  <label for="terms">
-                    <p>I agree to all <a href="/docs/CAMPUS.pdf" download>terms and conditions.</a></p>
-                  </label>
-                </div>
 
 
-                <br>
-                <p id="statement">Agree T&C to create Account<p>
-                  <p>Already have an account ! <a href="/signin">sign in </a></p>
+    </div>
+
+<!-- testimonial section -->
+    <section id="testimonials">
 
 
-                <button class="ibutton" type="submit" id="button1" style="visibility:hidden;">Sign Up</button>
 
-                    <hr class="hr2">
+      <div id="testimonial1" class="carousel slide" data-ride="carousel" data-interval="4000">
+        <div class="carousel-inner">
+          <div class="carousel-item">
+            <p class="pline">CAMPUS provides a platform, So that every one can share everything anonymously.</p>
+            <!-- <img class="pimg"src="images/backpack.png" alt="pic student"> -->
+          </div>
+          <div class="carousel-item">
+            <p class="pline">Shout faceless, Nameless. No need to show name just show your words.</p>
+            <!-- <img class="pimg" src="images/student.png" alt="pic student"> -->
 
-                <a id="button2" style="visibility:hidden;" class="ibutton btn-social btn-google" href="/auth/google" role="button">
-                  <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" height="25" alt="google">
-                  Google
-                </a>
-          </form>
+          </div>
+          <div class="carousel-item">
+            <p class="pline">Share your gossips, your ideas, your confession what ever you want.</p>
+            <!-- <img class="pimg" src="images/books.png" alt="pic student"> -->
+          </div>
+          <div class="carousel-item">
+            <p class="pline">Share is secure, with google security and hash algorithms.</p>
+            <!-- <img class="pimg" src="images/books.png" alt="pic student"> -->
+          </div>
+          <div class="carousel-item active">
+            <p class="pline">Everything you share is shown as Anonymous person's post, So we called them SECRET.</p>
+            <!-- <img class="pimg" src="images/books.png" alt="pic student"> -->
+          </div>
+
+
+
 
         </div>
 
+        <a class="carousel-control-prev testbut" href="#testimonial1" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+
+        </a>
+        <a class="carousel-control-next testbut" href="#testimonial1" role="button" data-slide="next">
+          <span class="carousel-control-next-icon"></span>
+
+        </a>
+      </div>
 
 
-      
 
-    </div>
-    
+
+
+
+    </section>
+
+
   </div>
 
   <script>
-    
-    function myfun(){
-      document.getElementById('button1').style.visibility='visible';
-      document.getElementById('button2').style.visibility='visible';
-      document.getElementById('terms').disabled="disabled";
-      document.getElementById('statement').style.display="none";
-      
+
+    function myfun() {
+
+      var x = document.getElementById("boxx");
+      if (x.style.visibility === "visible") {
+        x.style.visibility = "hidden";
+      }
+      else {
+        x.style.visibility = "visible";
+      }
+
     }
-    $(document).ready(function() {
-  $(window).keydown(function(event){
-    if(event.keyCode == 13) {
-      event.preventDefault();
-      return false;
-    }
-  });
-});
+    $(document).ready(function () {
+      $(window).keydown(function (event) {
+        if (event.keyCode == 13) {
+          event.preventDefault();
+          return false;
+        }
+      });
+    });
 
 
 

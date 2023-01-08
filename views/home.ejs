@@ -1,0 +1,324 @@
+<%- include('partials/Header') %>
+
+
+    <div class="page ">
+
+
+        <!-- <a style="width: max-content;" class="ibutton btn" href="/secrets">Secrets</a> -->
+        <div class="left stickybox1 borc bgc">
+
+
+            <% if(!accountuserdata.profilePic){ %>
+                <a href="/myaccount"><img class="profileImage" src="/images/user.png" alt="profileIMG"></a>
+                <% }else{ %>
+                    <a href="/myaccount"><img class="profileImage" src="<%=accountuserdata.profilePic%>"
+                            alt="profileIMG"></a>
+                    <% } %>
+
+
+                        <br>
+                        <h1 class="username">@<%=accountuserdata.username%>
+                        </h1>
+                        <p class="fullname"><i class="fi fi-rr-user"></i>
+                            <%=accountuserdata.firstname%>
+                                <%=accountuserdata.lastName%>
+                        </p>
+
+                        <div class="box1">
+                            <p><i class="fi fi-rr-paper-plane"></i> <b>Total posts</b></p>
+                            <p>
+                                <%=accountuserdata.secret.length%>
+                            </p>
+                            <p><i class="fi fi-rr-info"></i> <b>Full Name</b></p>
+                            <p>
+                                <%=accountuserdata.firstname%>
+                                    <%=accountuserdata.lastName%>
+                            </p>
+                            <p><i class="fi fi-rr-phone-call"></i> <b>Phone</b></p>
+                            <p>
+                                <%=accountuserdata.phone%>
+                            </p>
+                            <!-- <p><i class="fi fi-rr-envelope"></i> <b>E-mail</b></p>
+        <p><%=accountuserdata.email%></p> -->
+
+
+                            <a class="btn" href="/" role="button">Home</a>
+                            <!-- <a class="btn" href="/myaccount" role="button">My Account</a> -->
+                            <a class="btn" href="/logout" role="button">Sign Out</a>
+
+                        </div>
+
+
+        </div>
+
+
+
+
+        <div class="feed">
+
+
+
+            <div class="mainsubmit">
+                <h1>Create Post</h1>
+                <p class="rgb "><i class="fi fi-rr-user"></i> <b>
+                        <%=accountuserdata.firstname%>
+                            <%=accountuserdata.lastName%>
+                    </b></p>
+                <hr class="rgb">
+                <form style="margin: 0; padding:0;" action="/submit?from=" method="post">
+                    <textarea id="inputarea" name="secret" placeholder="What for today ?" required
+                        maxlength="500"></textarea>
+                    <br>
+                    <p id="charac-count">0/500</p>
+                    <button type="submit" class="btnx">POST</button>
+                </form>
+
+            </div>
+
+            <% var count=0; %>
+                <% data.reverse().forEach(function(x){ %>
+
+                    <div class="post borc bgc">
+                        <div class="postbody tbgc">
+                            <% var dateTime=x._id.getTimestamp()%>
+
+                                <p class="time rgb"><i class="fi fi-rr-clock"></i>
+                                    <%=dateTime.toLocaleDateString()%> - <%=dateTime.toLocaleTimeString()%>
+                                </p>
+                                <p class="postuser"><i class="fi fi-rr-incognito"></i> no-body</p>
+                                <hr>
+                                <% var txt=x.text %>
+                                    <% if(txt.length>100){%>
+                                        <h1>
+                                            <pre><%=txt.substring(0,100)%><span class="dots"> .... </span><span class="more"><%=txt.substring(100,500)%></span><span class="read readMore ">read more</span>
+             <%}else{%>
+<h1><pre><%=txt%></a>
+
+            <% } %> 
+
+        </pre>
+                                        </h1>
+                        </div>
+
+
+                        <hr>
+                        <div id="likesec" class="bar">
+                            <!-- <a href="/like?from=allpost&id="><img src="/images/like.png" alt="like"></a> -->
+
+                            <% if(likedpost.includes(x._id)){%>
+                                <img id='<%=count%>red' src="/images/redheart.png"
+                                    onclick="dislike('<%=x._id%>','<%=count%>')" alt="like">
+                                    
+                                <img id='<%=count%>nred' src="/images/heartnew.png" style="display: none;"
+                                    onclick="like('<%=x._id%>','<%=count%>')" alt="like">
+
+                                <% }else{ %>
+                                    <img id='<%=count%>nred' src="/images/heartnew.png"
+                                        onclick="like('<%=x._id%>','<%=count%>')" alt="like">
+
+                                    <img id='<%=count%>red' src="/images/redheart.png" style="display: none;"
+                                        onclick="dislike('<%=x._id%>','<%=count%>')" alt="like">
+
+                                    <% } %>
+
+                                    
+
+
+
+
+
+
+
+                                        <p id='<%=count%>' class="like rgb">
+                                            <%=x.like%>
+                                        </p>
+                                        <% count++; %>
+                        </div>
+
+
+
+                    </div>
+
+                    <% })%>
+
+
+
+
+        </div>
+
+
+
+        <div class="right stickybox2 borc bgc">
+
+            <p class="rgb"><i class="fi fi-rr-arrow-trend-up"></i> <b>Trending #1</b></p>
+            <p id="a"></p>
+            <p class="rgb"><i class="fi fi-rr-arrow-trend-up"></i> <b>Trending #2</b></p>
+            <p id="b"></p>
+            <p class="rgb"><i class="fi fi-rr-arrow-trend-up"></i> <b>Trending #3</b></p>
+            <p id="c"></p>
+        </div>
+
+
+
+
+    </div>
+
+
+
+    <script>
+
+        function trending() {
+            const xhr = new XMLHttpRequest();
+            var url = "/trend";
+            xhr.open('GET', url);
+            xhr.onload = () => {
+                const data = JSON.parse(xhr.response);
+
+                document.getElementById('a').innerText = data[0].text.substring(0, 50);
+                document.getElementById('b').innerText = data[1].text.substring(0, 50);
+                document.getElementById('c').innerText = data[2].text.substring(0, 50);
+
+            };
+            xhr.send();
+        }
+
+        trending();
+
+        var likebtn = document.getElementById('likebtn');
+
+        function like(x, y) {
+
+            
+document.getElementById(y+"red").style.display="block";
+            document.getElementById(y+"nred").style.display="none";
+                
+            const xhr = new XMLHttpRequest();
+            var url = "/like/" + x;
+            xhr.open('GET', url);
+            xhr.onload = () => {
+                const like = JSON.parse(xhr.response);
+                document.getElementById(y).innerText = like.like;
+
+                
+
+
+            };
+
+            xhr.send();
+            trending();
+        }
+
+        function dislike(x, y) {
+            
+            document.getElementById(y+"red").style.display="none";
+            document.getElementById(y+"nred").style.display="block";
+                
+
+            const xhr = new XMLHttpRequest();
+            var url = "/dislike/" + x;
+            xhr.open('GET', url);
+            xhr.onload = () => {
+                const like = JSON.parse(xhr.response);
+                document.getElementById(y).innerText = like.like;
+                
+                
+
+            };
+
+            xhr.send();
+            trending();
+        }
+
+
+    </script>
+
+
+    <script>
+        stickyElem1 = document.querySelector(".stickybox1");
+        stickyElem2 = document.querySelector(".stickybox2");
+        /* Gets the amount of height
+        of the element from the
+        viewport and adds the
+        pageYOffset to get the height
+        relative to the page */
+        currStickyPos1 = stickyElem1.getBoundingClientRect().top + window.pageYOffset;
+        currStickyPos2 = stickyElem1.getBoundingClientRect().top + window.pageYOffset;
+
+        window.onscroll = function () {
+
+            /* Check if the current Y offset
+            is greater than the position of
+            the element */
+            if (window.pageYOffset > currStickyPos1) {
+
+                stickyElem1.style.position = "fixed";
+                stickyElem1.style.top = "10px";
+
+                stickyElem2.style.position = "fixed";
+                stickyElem2.style.top = "10px";
+
+
+
+            } else {
+                stickyElem1.style.position = "relative";
+                stickyElem1.style.top = "initial";
+
+                stickyElem2.style.position = "relative";
+                stickyElem2.style.top = "initial";
+            }
+        }
+
+
+
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $(".read").click(function () {
+                $(this).prev().toggle();
+                $(this).siblings('.dots').toggle();
+                if ($(this).text() == 'read more') {
+                    $(this).text('read less');
+                }
+                else {
+                    $(this).text('read more');
+                }
+            });
+        });
+    </script>
+
+    <script>
+
+        let inputTextArea = document.getElementById("inputarea");
+        let characCount = document.getElementById("charac-count");
+        // let wordCount = document.getElementById("word-count");
+        inputTextArea.addEventListener("input", () => {
+            characCount.textContent = inputTextArea.value.length + "/500";
+            if (inputTextArea.value.length == 500) {
+                characCount.style.color = "#ff000080";
+            } else {
+                characCount.style.color = "#00000080";
+            }
+            //   let txt = inputTextArea.value.trim();
+            //   wordCount.textContent = txt.split(/\s+/).filter((item) => item).length;
+        });
+
+
+
+    </script>
+
+
+
+    </body>
+
+    <footer style="background-color: rgba(3, 145, 150, 0); color: rgb(3, 145, 150); height: 50px;">
+        <center>
+            <br>
+            <h6>@campus designed by Rahul bishnoi</h6>
+
+        </center>
+
+    </footer>
+
+    </html>

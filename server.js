@@ -9,8 +9,11 @@ const mongoose = require("mongoose");
 const ObjectId = require('mongodb').ObjectId;
 const session = require("express-session");
 const passport = require("passport");
-const passportLocalMongoose = require("passport-local-mongoose");
 
+const AWS = require('aws-sdk');
+const multer = require('multer');
+
+const passportLocalMongoose = require("passport-local-mongoose");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const findOrCreate = require("mongoose-findorcreate");
 
@@ -33,21 +36,76 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+
+// AWS CONFIG
+const awsconfig = {
+    accessKeyId: process.env.AcessKey,
+    secretAccessKey: process.env.Secretkey
+}
+
+const S3 = new AWS.S3(awsconfig);
+
+// MULTER CONFIG
+let uplaod = multer({
+    limits: 1024 * 1024 * 5,
+    fileFilter: (req, file, done) => {
+        if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/jpg' || file.mimetype === 'image/png') {
+            done(null, true);
+        } else {
+            done("Multer--> file type not supported", false);
+        }
+    }
+})
+
+// upload to s3 function
+const uploadToS3 = (fileData,filename) => {
+    return new Promise((resolve, reject) => {
+        const params = {
+            Bucket: process.env.bucketName,
+            Key: filename+".jpg",
+            ContentType: 'image/jpg',
+            Body: fileData
+        }
+
+        S3.upload(params, (err, data) => {
+            if (err) {
+                console.log(err);
+                reject(err);
+            }
+            else {
+                // console.log(data);
+                return resolve(data);
+            }
+        })
+
+    })
+}
+
+
+
+
+// mongoDB connection
 mongoose.connect(process.env.DB_key, { useNewUrlparser: true },()=>{
     console.log("connected to DATABASE SERVER");
 });
+
+
+// mongoDB schema
 
 const userSchema = new mongoose.Schema({
     lastupdate: Date,
     firstname: String,
     lastName: String,
     username: String,
+    profilePic:String,
     gender: String,
     email: String,
     phone: Number,
     password: String,
     googleId: String,
-    secret: Array
+    secret: Array,
+    likedPost:Array
 });
 
 const postSchema = new mongoose.Schema({
@@ -82,7 +140,6 @@ passport.use(new GoogleStrategy({
     clientSecret: process.env.CLIENT_SECRET,
     // callbackURL: "http://localhost:3000/auth/google/secrets"
 
-    // callbackURL: "https://morning-headland-46007.herokuapp.com/auth/google/secrets"
     callbackURL: "https://campus404.herokuapp.com/auth/google/secrets"
 
     // userProfileURL:"http://www.googleapis.com/oauth2/v3/userinfo"
@@ -103,11 +160,7 @@ passport.use(new GoogleStrategy({
 ));
 
 
-app.get("/signin", function (req, res) {
-    const response = req.query.error;
-    // var x=req.isAuthenticated();
-    res.render("signin", { errortext: response });
-});
+// API =-------------------->
 
 
 app.get('/auth/google',
@@ -122,21 +175,56 @@ app.get("/auth/google/secrets",
     });
 
 
+
+
+
+
+
 app.get("/", function (req, res) {
+
+    if (req.isAuthenticated()) {
+
+        var userid = req.session.passport.user;
+        User.findOne({ _id: userid }, function (err, accountuserdata) {
+            // console.log(data);
+            if (!err) {
+
+                Post.find({}, (err, data) => {
+                    if (!err) {
+
+
+                        res.render("home", { accountuserdata, data,likedpost:accountuserdata.likedPost });
+
+
+                    } else {
+                        res.render("errorpage", { message: err });
+                    }
+                })
+            }
+            else {
+                res.render("errorpage", { message: err });
+
+
+            }
+        });
+
+    }
+    else {
+
+        res.redirect("/signin?error=lf");
+
+    }
+
+});
+
+//horde
+app.get("/secrets", function (req, res) {
 
     if (req.isAuthenticated()) {
 
         var accountuser;
         var userid = req.session.passport.user;
-        // User.findOne({ _id: userid }, function (err, data) {
-        //     // console.log(data);
-        //     if (!err) {
-        //         accountuser = data.username;
-        //     }
-        //     else {
-        //         accountuser = err;
-        //     }
-        // })
+       
         User.find({ "secret": { $ne: null } }).sort({ "lastupdate": -1 }).exec(function (err, foundUser) {
             if (err) {
                 // console.log(err);
@@ -158,54 +246,20 @@ app.get("/", function (req, res) {
 
 
     else {
-        res.redirect("/signin?error=nes");
+        res.redirect("/signin?error=lf");
     }
 });
-
-
-
-app.get("/allpost", function (req, res) {
-
-    if (req.isAuthenticated()) {
-
-        var userid = req.session.passport.user;
-        User.findOne({ _id: userid }, function (err, accountuserdata) {
-            // console.log(data);
-            if (!err) {
-
-                Post.find({}, (err, data) => {
-                    if (!err) {
-
-
-                        res.render("allpost", { accountuserdata, data });
-
-
-                    } else {
-                        res.render("errorpage", { message: err });
-                    }
-                })
-            }
-            else {
-                res.render("errorpage", { message: err });
-
-
-            }
-        });
-
-    }
-    else {
-
-        res.redirect("/signin?error=post");
-
-    }
-
-})
-
-
 
 app.get("/contact", function (req, res) {
     res.render("contact");
 });
+
+app.get("/signin", function (req, res) {
+    const response = req.query.error;
+    // var x=req.isAuthenticated();
+    res.render("signin", { errortext: response });
+});
+
 
 app.get("/signup", function (req, res) {
 
@@ -222,21 +276,23 @@ app.get("/myaccount", function (req, res) {
         var email = "";
         var phone = "";
         var gender = "";
+        var profilePic="";
 
         var userid = req.session.passport.user;
         User.findOne({ _id: userid }, function (err, data) {
-
+            // console.log(data);
             if (!err) {
 
-                username = data.username,
+                    username = data.username,
                     firstname = data.firstname,
                     lastName = data.lastName,
                     username = data.username;
-                email = data.email,
+                    email = data.email,
                     phone = data.phone,
-                    gender = data.gender
+                    gender = data.gender,
+                    profilePic=data.profilePic
 
-                res.render("myaccount", { username, firstname, lastName, gender, email, phone, userid, userSecrets: data.secret });
+                res.render("myaccount", { username, firstname, lastName, gender, email, phone, userid, userSecrets: data.secret,profilePic });
 
 
             }
@@ -404,6 +460,7 @@ app.get("/delete", function (req, res) {
 });
 
 
+// ----------POST---------
 
 
 app.post("/updateUserInfo", function (req, res) {
@@ -414,6 +471,7 @@ app.post("/updateUserInfo", function (req, res) {
             gender: req.body.gender,
             email: req.body.email,
             phone: req.body.phone
+            
 
         }
 
@@ -430,6 +488,28 @@ app.post("/updateUserInfo", function (req, res) {
     }
     else {
         res.redirect("/signin");
+    }
+})
+app.post("/uploadProfilePic", uplaod.single("image"), (req, res) => {
+
+    if (req.file) {
+
+        var userid=req.session.passport.user;
+
+        uploadToS3(req.file.buffer,userid).then((result) => {
+            User.updateOne({ _id: userid }, { $set: {profilePic:result.Location} }, { upsert: true }, function (err) {
+                if (!err) {
+    
+                    res.redirect("/myaccount?status=sucess");
+    
+                } else {
+                    res.render("errorpage", { message: err });
+                }
+            
+            })
+        }).catch((err) => {
+            console.log(err)
+        })
     }
 })
 
@@ -476,56 +556,6 @@ app.post("/submit", function (req, res) {
 });
 
 
-
-//API LIKE TREND
-app.get("/like/:postid", function (req, res) {
-    if (req.isAuthenticated()) {
-
-
-        const fromto = req.query.from;
-        Post.updateOne({ _id: req.params.postid}, { $inc: { like: 1 } }, { upsert: true }, function (err) {
-            if (!err) {
-
-                // res.redirect(fromto);
-                Post.findById(req.params.postid,(err,data)=>{
-                    if(!err){
-                        res.send({like:data.like});
-                    }
-                    else{
-                        res.redirect(fromto);
-
-                    }
-                })
-                
-
-            } else {
-                res.render("errorpage", { message: err });
-            }
-        })
-
-    }
-    else {
-        res.redirect("/signin");
-    }
-})
-
-
-app.get("/trend",(req,res)=>{
-    Post.find({}).sort({"like":-1}).exec(function (err,data){
-        if(!err){
-        
-            res.send(data.slice(0,10));
-        }else{
-            res.send({message:"NOT FOUND"});
-        }
-    })
-});
-
-
-
-
-
-
 app.post("/signup", function (req, res) {
     const newUser = new User({
         firstname: req.body.firstName,
@@ -564,7 +594,116 @@ app.post("/signin",
     }));
 
 
+//API LIKE TREND
+app.get("/like/:postid", function (req, res) {
+    if (req.isAuthenticated()) {
 
+
+        const fromto = req.query.from;
+        Post.updateOne({ _id: req.params.postid}, { $inc: { like: 1 } }, { upsert: true },async function (err) {
+            if (!err) {
+
+                
+
+                // res.redirect(fromto);
+                Post.findById(req.params.postid,(err,data)=>{
+                    if(!err){
+                        res.send({like:data.like});
+                    }
+                    else{
+                        res.redirect(fromto);
+
+                    }
+                });
+
+                User.findById(req.session.passport.user, function (err,foundUser){
+                    if (err) {
+                        res.render("errorpage", { message: err });
+                    }
+                    else {
+                        if (foundUser) {
+                            foundUser.likedPost.push(req.params.postid);
+                            foundUser.save(function () {
+                                
+                            });
+                        }
+                    }
+                });
+                
+
+            } else {
+                res.render("errorpage", { message: err });
+            }
+        })
+
+    }
+    else {
+        res.redirect("/signin");
+    }
+})
+
+app.get("/dislike/:postid", function (req, res) {
+    if (req.isAuthenticated()) {
+
+
+        const fromto = req.query.from;
+        Post.updateOne({ _id: req.params.postid}, { $inc: { like: -1 } }, { upsert: true },async function (err) {
+            if (!err) {
+
+                
+
+                // res.redirect(fromto);
+                Post.findById(req.params.postid,(err,data)=>{
+                    if(!err){
+                        res.send({like:data.like});
+                    }
+                    else{
+                        res.redirect(fromto);
+
+                    }
+                });
+
+                User.findById(req.session.passport.user, function (err,foundUser){
+                    if (err) {
+                        res.render("errorpage", { message: err });
+                    }
+                    else {
+                        if (foundUser) {
+                            foundUser.likedPost.pull(req.params.postid);
+                            foundUser.save(function () {
+                                
+                            });
+                        }
+                    }
+                });
+                
+
+            } else {
+                res.render("errorpage", { message: err });
+            }
+        })
+
+    }
+    else {
+        res.redirect("/signin");
+    }
+})
+
+
+app.get("/trend",(req,res)=>{
+    Post.find({}).sort({"like":-1}).exec(function (err,data){
+        if(!err){
+        
+            res.send(data.slice(0,10));
+        }else{
+            res.send({message:"NOT FOUND"});
+        }
+    })
+});
+
+
+
+// ----------
 
 
     app.listen(process.env.PORT || 3000, function () {

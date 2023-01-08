@@ -1,112 +1,137 @@
-<%- include('partials/Header')%>
+<%- include('partials/Header2')%>
 
-<div class="logregs ">
-  <!-- section-1 -->
-<div class="container-fluid ">
-  <div class="row">
-    <div class="intro col-lg-6">
-      <h1 class="intro-heading">CAMPUS ,share everything anonymously with The World.</h1>
-      <!-- <a href="#LoginSignup"><button class="ibutton" type="button">Login</button></a> -->
-      <a href="/signup"><button class="ibutton" type="button">Sign Up</button></a>
 
-      <br><br><br>
 
-    </div>
-    
-      
-    <div class="col-lg-6 centerFlexColumn" >
-      
-      <!-- <img class="intro-img " src="images/iphone6.png" alt="phone logo"> -->
-      <div class="loginCard centerFlexColumn">
-        <h1 class="navbar-brand">CAMPUS</h1>
-        
-        <form class="form " action="/signin" method="post">
-          <% if(errortext==="log"){ %>
-            <p class="errortext" >Username or password is wrong. Try Again.</p> 
-            <% }%>
-            <%if(errortext==="nes"){ %>
-              <p class="errortext">Login to go Home .</p> 
-              <% } %> 
-              <%if(errortext==="acc"){ %>
-                <p class="errortext">Login to go My Account .</p> 
-                <% } %> 
-          <input  type="text" placeholder="Username" name="username" maxlength="13" minlength="3" required/>
-      
-      
-          <input type="password" placeholder="Password" name="password" required/>
-          <br>
-          <button class="ibutton" type="submit">Login</button>
-      
-        
-      
-          <hr class="hr2">
-          
-          <a class="ibutton btn-social btn-google" href="/auth/google" role="button">
-            <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" height="25" alt="google">
-             Google
-            </a>
-        </form>
+
+
+
+
+
+  <div class="logregs ">
+    <!-- section-1 -->
+    <div class="container-fluid ">
+      <div class="row">
+        <div class="intro col-lg-6">
+          <h1 class="intro-heading">CAMPUS ,share everything anonymously with The World.</h1>
+          <!-- <a href="#LoginSignup"><button class="ibutton" type="button">Login</button></a> -->
+          <a href="/signup"><button class="ibutton" type="button">Sign Up</button></a>
+
+          <br><br><br>
+
+        </div>
+
+
+        <div class="col-lg-6 centerFlexColumn">
+
+          <!-- <img class="intro-img " src="images/iphone6.png" alt="phone logo"> -->
+          <div class="loginCard centerFlexColumn">
+            <h1 class="navbar-brand">CAMPUS</h1>
+
+            <form class="form " action="/signin" method="post">
+              <% if(errortext==="log" ){ %>
+                <p class="errortext">Username or password is wrong. Try Again.</p>
+                <% }%>
+                  <%if(errortext==="lf"){ %>
+                    <p class="errortext">Login to continue</p>
+                    <% } %>
+                      <%if(errortext==="acc"){ %>
+                        <p class="errortext">Login to go My Account.</p>
+                        <% } %>
+                          <input type="text" placeholder="Username" name="username" maxlength="13" minlength="3"
+                            required />
+
+
+                          <input id="pass" type="password" placeholder="Password" name="password" required />
+
+                         
+                            <div>
+                               <input style="width: max-content;float: left;margin: 7px 10px;" id="visi" type="checkbox"
+                            onclick="visible()">Show Password
+                            </div>
+                          <script>
+                            function visible() {
+                              var x = document.getElementById("pass");
+                              if (x.type === "password") {
+                                x.type = "text";
+                              } else {
+                                x.type = "password";
+                              }
+                            }
+                          </script>
+
+                          <br>
+                          <button class="ibutton" type="submit">Login</button>
+
+
+
+                          <hr class="hr2">
+
+                          <a class="ibutton btn-social btn-google" href="/auth/google" role="button">
+                            <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" height="25" alt="google">
+                            Google
+                          </a>
+            </form>
+          </div>
+
+
+        </div>
       </div>
-      
-
     </div>
+    <!-- testimonial section -->
+    <section id="testimonials" class="">
+
+
+
+      <div id="testimonial1" class="carousel slide" data-ride="carousel" data-interval="4000">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <p class="pline">CAMPUS provides a platform, So that every one can share everything anonymously.</p>
+            <!-- <img class="pimg"src="images/backpack.png" alt="pic student"> -->
+          </div>
+          <div class="carousel-item">
+            <p class="pline">Shout faceless, Nameless. No need to show name just show your words.</p>
+            <!-- <img class="pimg" src="images/student.png" alt="pic student"> -->
+
+          </div>
+          <div class="carousel-item">
+            <p class="pline">Share your gossips, your ideas, your confession what ever you want.</p>
+            <!-- <img class="pimg" src="images/books.png" alt="pic student"> -->
+          </div>
+          <div class="carousel-item">
+            <p class="pline">Share is secure, with google security and hash algorithms.</p>
+            <!-- <img class="pimg" src="images/books.png" alt="pic student"> -->
+          </div>
+          <div class="carousel-item">
+            <p class="pline">Everything you share is shown as Anonymous person's post, So we called them SECRET.</p>
+            <!-- <img class="pimg" src="images/books.png" alt="pic student"> -->
+          </div>
+
+
+
+
+        </div>
+
+        <a class="carousel-control-prev testbut" href="#testimonial1" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+
+        </a>
+        <a class="carousel-control-next testbut" href="#testimonial1" role="button" data-slide="next">
+          <span class="carousel-control-next-icon"></span>
+
+        </a>
+      </div>
+
+
+
+
+
+
+    </section>
+
   </div>
-</div>
-<!-- testimonial section -->
-<section id="testimonials" class="">
-
-
-
-  <div id="testimonial1" class="carousel slide" data-ride="carousel" data-interval="4000">
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <p class="pline">CAMPUS provides a platform, So that every one can share everything anonymously.</p>
-        <!-- <img class="pimg"src="images/backpack.png" alt="pic student"> -->
-      </div>
-      <div class="carousel-item">
-        <p class="pline">Shout faceless, Nameless. No need to show name just show your words.</p>
-        <!-- <img class="pimg" src="images/student.png" alt="pic student"> -->
-
-      </div>
-      <div class="carousel-item">
-        <p class="pline">Share your gossips, your ideas, your confession what ever you want.</p>
-        <!-- <img class="pimg" src="images/books.png" alt="pic student"> -->
-      </div>
-      <div class="carousel-item">
-        <p class="pline">Share is secure, with google security and hash algorithms.</p>
-        <!-- <img class="pimg" src="images/books.png" alt="pic student"> -->
-      </div>
-      <div class="carousel-item">
-        <p class="pline">Everything you share is shown as Anonymous person's post, So we called them SECRET.</p>
-        <!-- <img class="pimg" src="images/books.png" alt="pic student"> -->
-      </div>
-
-
-
-
-    </div>
-
-    <a class="carousel-control-prev testbut" href="#testimonial1" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon"></span>
-
-    </a>
-    <a class="carousel-control-next testbut" href="#testimonial1" role="button" data-slide="next">
-      <span class="carousel-control-next-icon"></span>
-
-    </a>
-  </div>
 
 
 
 
 
-
-</section>
-
-</div>
-
-
-
-
-
-<%- include('partials/Footer') %>
+  <%- include('partials/Footer') %>
