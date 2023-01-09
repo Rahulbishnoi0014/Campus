@@ -306,7 +306,7 @@ form .categories .formbox{
 
 
 .loginCard {
-  background-color: #2a5756c4;
+  background-color: rgb(3, 145, 150,0.7);
   padding-top: 2rem;
   border: 3px solid white;
   box-shadow: 0px 0px 20px 5px white;
@@ -371,7 +371,7 @@ form input:hover {
 label p {
   font-size: 1.5rem;
 
-  color: rgb(13, 140, 162);
+  color: white;
 
 }
 
@@ -504,64 +504,6 @@ select option {
 label p {
   margin: 0;
 }
-
-.userInfo table {
-  
-  width:max-content;
-
-
-
-}
-/* 
-.userInfo table tr:hover {
-
-  border: 2px solid rgb(3, 145, 150);
-transition: 0.3s;
-
-} */
-
-.userInfo table tr:first-child {
-  /* border: 2px solid rgb(3, 145, 150); */
-  
-  color: rgb(3, 145, 150);
-  font-weight: 600;
-}
-
-.userInfo table td p {
-
-  font-size: 2.5rem;
-}
-.userInfo table td select{
-margin-left: 30px;
-width: 80%;
-font-size: 1.5rem;
-}
-.userInfo table td input{
-  font-size: 1.5rem;
-  width: 80%;
-  border-bottom: 2px solid rgb(3, 145, 150);
-
-  }
-  .userInfo table td .ibutton{
-    font-size: 1rem;
-    width: 40%;
-  
-    }
-
-
-
-.userInfo table img {
-  float: right;
-  width: 100px;
-  transition: 0.3s;
-  margin: 5px;
-}
-
-.userInfo table img:hover {
-
-  transform: scale(1.2);
-}
-
 
 
 

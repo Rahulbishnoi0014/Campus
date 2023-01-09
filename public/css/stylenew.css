@@ -25,14 +25,15 @@ body {
   color: rgb(3, 145, 150);
   font-size: 2.4rem;
 }
+
 .navbar-title:hover {
   text-decoration: none;
   color: rgb(3, 145, 150);
- 
+
 }
 
-.nav-link p{
-  
+.nav-link p {
+
   margin: 0px 10px;
   font-size: 1.2rem;
   font-weight: 600;
@@ -41,10 +42,11 @@ body {
   transition: 0.2s;
 
 }
-.nav-link p:hover{
-  
+
+.nav-link p:hover {
+
   padding: 4px;
-  border: 2px solid rgb(3, 145, 150) ;
+  border: 2px solid rgb(3, 145, 150);
 
 }
 
@@ -57,33 +59,33 @@ body {
     size: 3rem;
   }
 
-  .navbar-title{
+  .navbar-title {
     font-size: 6rem;
   }
 
   .navbut {
     height: 6rem;
     width: 6rem;
-    background-color: rgb(3, 145, 150,0.5);
+    background-color: rgb(3, 145, 150, 0.5);
     border-radius: 10px;
     padding: 0;
     border: 0px;
     outline: none;
     transition: 0.5s;
   }
-  
 
-  .navbar1 button:focus{
+
+  .navbar1 button:focus {
     border: 0;
     outline: none;
   }
 
 
-  .nav-link p{
+  .nav-link p {
     font-size: 3rem;
   }
 
-  
+
 
 
 
@@ -96,54 +98,55 @@ body {
 
 
 .page {
-    margin: 0;    
-    display: flex;
-    padding: 10px;
-    justify-content: space-evenly;
-    position: relative;
-  
-  
-  }
+  margin: 0;
+  display: flex;
+  padding: 10px;
+  justify-content: space-evenly;
+  position: relative;
 
- 
-  
-  .left {
-    width: 20%;
-    height: max-content;
-    /* border-radius: 10px;
+
+}
+
+
+
+.left {
+  width: 20%;
+  height: max-content;
+  /* border-radius: 10px;
     background-color: rgb(245, 215, 215); */
 
-    padding: 1rem;
-    position:absolute;
-    top: 10px;
-    left: 30px;
+  padding: 1rem;
+  position: absolute;
+  top: 10px;
+  left: 30px;
 
 
-  }
+}
 
 
-  
- .left .username{
-    font-size: 25px;
-    width: max-content;
 
- }
- .left .fullname{
-    font-size: 15px;
-    width: max-content;
-    
+.left .username {
+  font-size: 25px;
+  width: max-content;
 
- }
+}
 
- .left .box1{
-    padding: 10px;
-    /* border-radius: 10px;
+.left .fullname {
+  font-size: 15px;
+  width: max-content;
+
+
+}
+
+.left .box1 {
+  padding: 10px;
+  /* border-radius: 10px;
     background-color: rgb(234, 158, 216); */
-    
- }
 
- .box1 a{
-color: rgb(3, 145, 150);
+}
+
+.box1 a {
+  color: rgb(3, 145, 150);
   width: 100%;
   text-align: left;
   margin: 0;
@@ -151,74 +154,79 @@ color: rgb(3, 145, 150);
   font-size: 1.3rem;
 
 
- }
- .box1 a:hover{
+}
+
+.box1 a:hover {
   color: rgb(0, 0, 0);
- }
- .box1 p{
+}
+
+.box1 p {
   margin: 5px;
- }
-  
+}
+
 
 .right {
-    width: 20%;
-    height: 500px;
-    
-    padding: 10px;
+  width: 20%;
+  height: 500px;
 
-    position:absolute;
-    top: 10px;
-    right: 30px;
+  padding: 10px;
+
+  position: absolute;
+  top: 10px;
+  right: 30px;
 
 }
 
-  .right p{
-    width: 100%;
-    height: max-content;
-    margin: 10px;
-  }
-  
+.right p {
+  width: 100%;
+  height: max-content;
+  margin: 10px;
+}
 
 
 
 
-  .feed {
-    width: 50%; 
-   margin: 10px 60px 10px 60px;
 
-  }
-  
-  .post {
-    height: max-content;
-    margin: 30px 10px;
-    padding: 10px;
-    color: black;
+.feed {
+  width: 50%;
+  margin: 10px 60px 10px 60px;
 
-    box-shadow: 0 0 7px 2px rgb(72, 72, 72);
-    /* background-color: pink; */
-    /* position: relative; */
-  
-  }
+}
 
-  .postbody{
-    height: max-content;
+.post {
+  height: max-content;
+  margin: 30px 10px;
+  padding: 10px;
+  color: black;
 
-  }
-  .more{
-    display: none;
- }
-  .post hr{
-    margin: 5px;
-  }
-  .post .time{
-    
-    text-align: right;
-    margin: 0px;
-    font-size: 10px;
-  }
+  box-shadow: 0 0 7px 2px rgb(72, 72, 72);
+  /* background-color: pink; */
+  /* position: relative; */
 
-  .post .postuser{
-    font-size: 1.5rem;
+}
+
+.postbody {
+  height: max-content;
+
+}
+
+.more {
+  display: none;
+}
+
+.post hr {
+  margin: 5px;
+}
+
+.post .time {
+
+  text-align: right;
+  margin: 0px;
+  font-size: 10px;
+}
+
+.post .postuser {
+  font-size: 1.5rem;
   /* font-family: 'Quicksand', sans-serif; */
   margin: 0;
   color: rgb(3, 145, 150);
@@ -232,269 +240,288 @@ color: rgb(3, 145, 150);
 
 
 
-.mainsubmit{
-    height: max-content;
-    margin: 10px;
-    padding: 10px;
-    /* background-color: rgb(137, 243, 137); */
-    /* background-image: linear-gradient(45deg ,rgb(3, 145, 150),rgb(88, 255, 88)); */
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 0 5px 2px #039196;
-  
+.mainsubmit {
+  height: max-content;
+  margin: 10px;
+  padding: 10px;
+  /* background-color: rgb(137, 243, 137); */
+  /* background-image: linear-gradient(45deg ,rgb(3, 145, 150),rgb(88, 255, 88)); */
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 5px 2px #039196;
+
 }
 
-  .mainsubmit h1{
-    font-size: 2rem;
-    color: rgb(0, 0, 0);
-    text-align: center;
-    
-  }
-  .mainsubmit p{
-    font-size: 1.5rem;
-    
-    
-    
+.mainsubmit h1 {
+  font-size: 2rem;
+  color: rgb(0, 0, 0);
+  text-align: center;
+
+}
+
+.mainsubmit p {
+  font-size: 1.5rem;
+
+
+
+}
+
+.mainsubmit textarea {
+
+  resize: none;
+  border: 0px dashed rgb(3, 145, 150);
+  font-size: 1rem;
+  width: 100%;
+  height: 100px;
+  /* background-color: rgb(236, 235, 235); */
+  /* background-color: white; */
+  color: rgb(0, 0, 0);
+  /* border-radius: 20px; */
+  padding: 10px;
+}
+
+.mainsubmit textarea:focus {
+  outline: 0;
+}
+
+#charac-count {
+  font-size: 1rem;
+  text-align: right;
+  width: 100%;
+  margin: 0;
+  color: rgba(0, 0, 0, 0.5);
+
+
+}
+
+
+.btnx {
+  width: 100%;
+  padding: 5px;
+  font-size: 1.2rem;
+  color: white;
+  background-color: #039196;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btnx:hover {
+  background-color: rgba(3, 145, 150, 0.626);
+
+
+}
+
+
+
+
+
+
+.bar {
+  margin-top: 10px;
+  display: flex;
+}
+
+.bar img {
+  height: 40px;
+  margin: 0px 10px;
+  transition: 0.2s;
+
+}
+
+.bar img:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+
+}
+
+.like {
+  margin-top: 5px;
+  font-size: 1.3rem;
+
+
+}
+
+.post h1 pre {
+  font-size: 1.7rem;
+  overflow-x: auto;
+
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.circlebtn {
+  display: none;
+}
+
+@media (max-width:1028px) {
+  .page {
+    display: block;
+    justify-content: center;
+    margin: 0px;
+    /* padding: 10px; */
+
   }
 
-  .mainsubmit textarea{
-    
-    resize: none;
-    border: 0px dashed rgb(3, 145, 150);
-    font-size: 1rem;
-    width: 100%;
-    height: 100px;
-    /* background-color: rgb(236, 235, 235); */
-    /* background-color: white; */
-    color: rgb(0, 0, 0);
-    /* border-radius: 20px; */
+  .circlebtn {
+    display: block;
+  }
+
+  .circlebtn .parent {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .circlebtn .child {
     padding: 10px;
   }
-  .mainsubmit textarea:focus{
-    outline: 0;
+
+  .circle {
+    height: 100px;
+    width: 100px;
   }
 
-  #charac-count{
-    font-size: 1rem;
-    text-align: right;
+  .trendbox,
+  .profilebox {
     width: 100%;
-    margin: 0;
-    color: rgba(0, 0, 0, 0.5);
-    
-
+    margin: 20px 0px;
+    font-size: 2.5rem;
+    padding: 20px;
   }
-  
-  
-  .btnx{
-    width: 100%;
-    padding: 5px;
-    font-size: 1.2rem;
-    color: white;
-    background-color: #039196;
-    border: 0;
-    border-radius: 5px;
-    cursor: pointer;
+
+  .profilebox h1 {
+    font-size: 3rem;
   }
-  .btnx:hover{
-    background-color: rgba(3,145,150, 0.626);
 
+  .profilebox img {
+    height: 200px;
+    width: 200px;
+    float: right;
+    margin: 10px 25px 0px 10px;
+  }
 
+  .profilebox p {
+    font-size: 2.5rem;
   }
 
 
-
-
-
-
-  .bar{
-    margin-top: 10px;
-    display: flex;
-  }
-  
-  .bar img{
-    height: 40px;
-    margin: 0px 10px;
-    transition: 0.2s;
-    
-  }
-  .bar img:hover{
-    cursor: pointer;
-    transform: scale(1.1);
-
-  }
-  .like{
-    margin-top: 5px;
-  font-size: 1.3rem;
- 
-  
-  }
-  
-  .post h1 pre{
-    font-size: 1.7rem;
-    overflow-x: auto;
-    
-    white-space: pre-wrap;
-    word-wrap: break-word;
-  }
-
-  .circlebtn{
+  .left,
+  .right {
     display: none;
   }
 
-  @media (max-width:1028px) {
-    .page{
-      display: block;
-      justify-content:center;
-      margin: 0px;
-      /* padding: 10px; */
-    
-    }
-
-    .circlebtn{
-      display: block;
-    }
-    .circlebtn .parent{
-        display: flex;
-        justify-content: space-evenly;
-    }
-    .circlebtn .child{
-      padding: 10px;
-  }
-    .circle{
-      height: 100px;
-      width: 100px;
-    }
-
-    .trendbox,.profilebox{
-      width: 100%;
-      margin: 20px 0px;
-      font-size: 2.5rem;
-      padding: 20px;
-    }
-
-    .profilebox h1{
-      font-size: 3rem;
-    }
-    .profilebox img{
-      height: 200px;
-      width: 200px;
-      float: right;
-      margin: 10px 25px 0px 10px;
-    }
-    .profilebox p{
-      font-size: 2.5rem;
-    }
-    
-    
-    .left,.right{
-      display: none;
-    }
-    
-    .feed{
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      width: 100%;
-      margin: 0px ;
-      height: 100vh;
+  .feed {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0px;
+    /* height: 100vh;
    overflow-y: scroll;
-   -ms-overflow-style: none;  /* IE and Edge */
+   -ms-overflow-style: none;  
   scrollbar-width: none; 
 
-   text-align: justify;
-  
+   text-align: justify; */
+
   }
 
-  .feed::-webkit-scrollbar{
-    display: none;
-  }
-  
-    .post, .mainsubmit{
-      width: 100%;
-      margin: 40px 10px;
-    }
-    
-    .postbody{
-      height: max-content;
-      width: 100%;
-    
-    }
-    
-    
-    .post .time{
-      font-size: 30px;
-    }
-    
-    .post .postuser,.btnx{
-      font-size: 3rem;
 
-    }
-    .post h1 pre,.mainsubmit h1,.mainsubmit p{
-      font-size: 3.5rem;
-    }
-    
-  
-    .mainsubmit textarea{
-      font-size: 3rem;
-      height: 300px;
-      
-    }
-    #charac-count{
-      font-size: 2rem;
-     
-    }
-  
-    .bar img{
-      height: 70px;
-      
-    }
-    .like{
-      margin-top: 0px;
+  .post,
+  .mainsubmit {
+    width: 100%;
+    margin: 40px 10px;
+  }
+
+  .postbody {
+    height: max-content;
+    width: 100%;
+
+  }
+
+
+  .post .time {
+    font-size: 30px;
+  }
+
+  .post .postuser,
+  .btnx {
     font-size: 3rem;
-   
-    
-    }
-    
-    
-    
-    
-    
-    
-    
-      }
-    
 
-
-  
-  .borc{
-    border-radius: 10px;
-    
   }
 
-  
-
-  .bgc{
-    background-color: white;
-    color: black;
+  .post h1 pre,
+  .mainsubmit h1,
+  .mainsubmit p,
+  .mainsubmit h2 {
+    font-size: 3.5rem;
   }
 
 
-.rgb,.fi{
+  .mainsubmit textarea {
+    font-size: 3rem;
+    height: 300px;
+
+  }
+
+  #charac-count {
+    font-size: 2rem;
+
+  }
+
+  .bar img {
+    height: 70px;
+
+  }
+
+  .like {
+    margin-top: 0px;
+    font-size: 3rem;
+
+
+  }
+
+
+
+
+
+
+
+}
+
+
+
+
+.borc {
+  border-radius: 10px;
+
+}
+
+
+
+.bgc {
+  background-color: white;
+  color: black;
+}
+
+
+.rgb,
+.fi {
   color: rgb(3, 145, 150);
 }
 
 
-.visible{
+.visible {
   height: 20px;
 }
-.visible:active{
-  background-color: rgb(3,145,150);
+
+.visible:active {
+  background-color: rgb(3, 145, 150);
   border-radius: 20px;
 }
 
 
 
-.profileImgSec{
+.profileImgSec {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -502,16 +529,18 @@ color: rgb(3, 145, 150);
 
 }
 
-.profileForm input{
+.profileForm input {
   background-color: rgba(255, 255, 255, 0.47);
   border-radius: 0;
-  
-  
+
+
 }
-.profileForm label{
+
+.profileForm label {
   color: #039196;
 }
-.profileForm .ibutton{
+
+.profileForm .ibutton {
   font-size: 1rem;
   width: max-content;
   padding: 10px;
@@ -519,24 +548,141 @@ color: rgb(3, 145, 150);
 
 
 
-.profileImage{
+.profileImage {
   height: 100px;
   width: 100px;
   border-radius: 50%;
 }
-.editProfileImage{
+
+.editProfileImage {
   height: 150px;
   width: 150px;
   border-radius: 50%;
 }
 
-#arrow{
+
+#userinfoslide {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.editclose {
+  float: right;
+  height: 100px;
+  width: 100px;
+}
+
+.slidebox{
+  width: 100%;
+}
+.slidebox b {
+  color: rgb(3, 145, 150);
+}
+
+.editform {
+  width: 100%;
+  padding: 20px;
+  margin: 20px;
+  /* display: flex;
+  flex-wrap: wrap;
+  justify-content:space-between; */
+}
+
+.editform input {
+  width: 100%;
+
+}
+
+#cancle {
+  color: black;
+  font-size: 2rem;
+  margin: 20px;
+  /* padding: 0 30px; */
+  border: 2px solid black;
+}
+
+#visi{
+  width: max-content;
+  float: left;
+  margin: 7px 10px;
+
+  height: 20px;
+  width: 20px;
+  
+}
+
+@media (max-width:1028px) {
+
+  #visi{
+    margin-top: 20px;
+    height: 40px;
+    width: 40px;
+  }
+
+  
+
+  .editform .ibutton {
+
+    font-size: 2rem;
+    width: 400px;
+
+  }
+
+  #userinfoslide {
+    font-size: 2.5rem;
+  }
+
+  .editclose {
+    height: 250px;
+    width: 250px;
+
+  }
+
+  .editform select{
+    width: 70%;
+  }
+  .editform h3{
+    font-size: 3rem;
+  }
+
+
+
+  .profileImgSec .ibutton,.editform .ibutton {
+    font-size: 3rem;
+    padding: 10px 40px;
+  }
+
+  .profileImgSec .editimg {
+    font-size: 3rem;
+  }
+
+  .profileForm label {
+    color: #039196;
+    font-size: 3rem;
+  }
+
+  .editProfileImage {
+    height: 250px;
+    width: 250px;
+  }
+
+
+
+
+
+}
+
+
+
+
+
+#arrow {
   height: 2rem;
   transition: 0.5s;
 }
 
-.rotate90{
+.rotate90 {
   transform: rotate(90deg);
   transition: 0.5s;
 }
-

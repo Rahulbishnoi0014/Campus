@@ -35,202 +35,93 @@
 
       </div>
 
-      <h2>Your Account Information <img id="arrow" src="/images/arrow.png" alt="arrow"> </h2>
+      <h2 id="infoexpand">Your Account Information <img id="arrow" src="/images/arrow.png" alt="arrow"> </h2>
 
 
       <div class="userinfoforms">
-        <table id="infotable">
-          <tr>
-            <td>
-              <p>Username</p>
-            </td>
-            <td>
-              <p>:</p>
-            </td>
 
-            <td>
-              <p>
-                <%=username%>
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p>First Name</p>
-            </td>
-            <td>
-              <p>:</p>
-            </td>
+        <div id="userinfoslide" class="">
 
-            <td>
-              <p>
-                <%=firstname%>
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p>Last Name</p>
-            </td>
-            <td>
-              <p>:</p>
-            </td>
+          <div class="slidebox">
+            <p><b>Username</b></p>
+          <p><%=username%></p>
 
-            <td>
-              <p>
-                <%=lastName%>
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p>Gender</p>
-            </td>
-            <td>
-              <p>:</p>
-            </td>
+          <p><b>First Name</b></p>
+          <p><%=firstname%></p>
 
-            <td>
-              <p>
-                <%=gender%>
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p>Email</p>
-            </td>
-            <td>
-              <p>:</p>
-            </td>
+          <p><b>Last Name</b></p>
+          <p><%=lastName%></p>
 
-            <td>
-              <p>
-                <%=email%>
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p>Phone no.</p>
-            </td>
-            <td>
-              <p>:</p>
-            </td>
-            <td>
-              <p>
-                <%=phone%>
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-            <td></td>
-            </td>
-            <td> <img title="Edit" class="editclose" id="edit" onclick="change1()" src="/images/editicon.png"
-                alt="edit icon">
-            </td>
-          </tr>
-        </table>
+          
+          </div>
 
+          <div class="slidebox">
+          <p><b>Gender</b></p>
+          <p><%=gender%></p>
+          <p><b>Email</b></p>
+          <p><%=email%></p>
+
+          <p><b>Phone no.</b></p>
+          <p><%=phone%></p>
+
+          <img title="Edit" class="editclose" id="edit" src="/images/editicon.png" alt="edit icon">
+
+          </div>
+
+        </div>
 
         <form id="editform" class="editform" action="/updateUserInfo" method="post" style="display:none;">
-          <table>
-            <tr>
-              <td>
-                <p>Username</p>
-              </td>
-              <td>
-                <p>:</p>
-              </td>
-              <td>
-                <p>
-                  <%=username%>
-                </p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <p>First Name</p>
-              </td>
-              <td>
-                <p>:</p>
-              </td>
-              <td><input id="firstname" name="firstName" type="text" placeholder="<%=firstname%>"
-                  value="<%=firstname%>">
-              </td>
 
-            </tr>
-            <tr>
-              <td>
-                <p>Last Name</p>
-              </td>
-              <td>
-                <p>:</p>
-              </td>
+          <h3 class="rgb">Edit your personal Information.</h3>
 
+       <div class="slidebox">
+        <label for="firstname">
+          <p>First Name</p>
+        </label>
+        <input id="firstname" name="firstName" type="text" placeholder="<%=firstname%>" value="<%=firstname%>">
 
-              <td><input type="text" name="lastName" placeholder="<%=lastName%>" value="<%=lastName%>"></td>
-
-            </tr>
-            <tr>
-              <td>
-                <p>Gender</p>
-              </td>
-              <td>
-                <p>:</p>
-              </td>
-
-              <td>
-                <div class="radioInputs">
-
-                  <select name="gender" id="gender">
-                    <option style="display:none" value="<%=gender%>"></option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-
-                  </select>
-              </td>
-
-            </tr>
-            <tr>
-              <td>
-                <p>Email</p>
-              </td>
-              <td>
-                <p>:</p>
-              </td>
-              <td> <input type="email" name="email" id="email" placeholder="<%=email%>" value="<%=email%>">
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <p>Phone no.</p>
-              </td>
-              <td>
-                <p>:</p>
-              </td>
-              <td> <input type="tel" placeholder="<%=phone%>" value="<%=phone%>" name="phone" maxlength="12"
-                  minlength="10" />
-              </td>
-
-            </tr>
-
-            <tr>
-              <td>
-
-              </td>
-              <td></td>
-              <td>
-                <button class="btn ibutton" type="submit">SAVE</button>
-                <button class="btn ibutton" onclick="change2()" type="submit">Cancle</button>
+        <label for="lastname">
+          <p>Last Name</p>
+        </label>
+        <input type="text" name="lastName" placeholder="<%=lastName%>" value="<%=lastName%>">
 
 
 
-              </td>
-            </tr>
-          </table>
+       </div>
+
+       <div class="slidebox">
+        
+
+        <label for="gender">
+          <p>Gender</p>
+        </label>
+        <select name="gender" id="gender">
+          <option style="display:none" value="<%=gender%>"></option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+
+        </select>
+        <br>
+
+
+        <label for="email">
+          <p>Email</p>
+        </label>
+        <input type="email" name="email" id="email" placeholder="<%=email%>" value="<%=email%>">
+
+        <label for="tel">
+          <p>Phone no.</p>
+        </label>
+        <input id="tel" type="tel" placeholder="<%=phone%>" value="<%=phone%>" name="phone" maxlength="12"
+          minlength="10" />
+
+
+        <button class="btn ibutton" type="submit">SAVE</button>
+        <a class="btn" id="cancle"><p >Cancle</p></a>
+
+       </div>
+
 
         </form>
 
@@ -256,7 +147,7 @@
           <textarea id="inputarea" name="secret" placeholder="What for today ?" required maxlength="500"></textarea>
           <br>
           <p id="charac-count">0/500</p>
-          <button  id="submitbtn1" type="submit" class="btnx">POST</button>
+          <button id="submitbtn1" type="submit" class="btnx">POST</button>
         </form>
 
         <script>
@@ -321,13 +212,14 @@
       $(".editimg").hide();
       $(".userinfoforms").hide();
       $(".mainsubmit").hide();
+      $("#editform").hide();
 
       $(".editProfileImage").click(() => {
-        $(".profileForm").toggle(500);
+        $(".profileForm").toggle(300);
 
       });
       $(".editProfileImage").hover(() => {
-        $(".editimg").slideToggle(400);
+        $(".editimg").slideToggle(300);
 
       });
 
@@ -336,11 +228,27 @@
 
       });
 
+      $("#edit").click(() => {
+        $("#userinfoslide").slideUp(300);
+
+        $("#editform").slideToggle(300);
+
+
+      });
+      $("#cancle").click(() => {
+        $("#editform").slideUp(300);
+
+        $("#userinfoslide").slideToggle(300);
+
+
+      });
 
 
 
-      $("#arrow").click(() => {
-        $(".userinfoforms").toggle(400);
+
+
+      $("#infoexpand").click(() => {
+        $(".userinfoforms").slideToggle(300);
         $("#arrow").toggleClass("rotate90");
 
 
@@ -358,26 +266,6 @@
 
 
 
-  </script>
-  <script>
-
-    function change1() {
-      document.getElementById('infotable').style.display = 'none';
-      document.getElementById('editform').style.display = 'block';
-      document.getElementById('close').style.display = 'block';
-      document.getElementById('edit').style.display = 'none';
-
-
-
-    }
-    function change2() {
-      document.getElementById('infotable').style.display = 'block';
-      document.getElementById('editform').style.display = 'none';
-      document.getElementById('close').style.display = 'none';
-      document.getElementById('edit').style.display = 'block';
-
-
-    }
   </script>
   <script>
     $(document).ready(function () {

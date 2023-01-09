@@ -59,8 +59,11 @@
                   <input id="username" type="text" placeholder="Username" name="username" maxlength="13" minlength="3"
                     required />
                   <input id="pass" type="password" placeholder="Password" name="password" required />
-                  <input style="width: max-content;float: left;margin: 7px 10px;" id="visi" type="checkbox"
-                    onclick="visible()"><label for="visi">Show Password</label>
+
+                  <div id="#visibox">
+                    <input id="visi" type="checkbox"onclick="visible()"><label for="visi"><p>Show Password</p></label>
+                  </div>
+
                   <script>
                     function visible() {
                       var x = document.getElementById("pass");
