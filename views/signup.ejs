@@ -64,6 +64,7 @@
                     <input id="visi" type="checkbox"onclick="visible()"><label for="visi"><p>Show Password</p></label>
                   </div>
 
+
                   <script>
                     function visible() {
                       var x = document.getElementById("pass");
@@ -77,7 +78,6 @@
 
 
             </div>
-            <p>Already have an account ! <a href="/signin">sign in </a></p>
 
 
           </div>
@@ -87,16 +87,21 @@
             <input type="checkbox" name="terms" id="terms" onchange="myfun()">
             <label for="terms">
               <p>I agree to all <a href="/docs/CAMPUS.pdf" download>terms and conditions.</a></p>
+
             </label>
+            <p>Already have an account ! <a href="/signin">sign in </a></p>
+
+
           </div>
 
 
           
 
-          <p id="statement">Agree T&C to create Account</p>
+          <p id="statement">Agree T&C to Create buttons</p>
 
 
-          <div id="boxx" style="visibility:hidden; display: flex;justify-content: center;align-items: center;">
+          <div id="boxx" style="display: flex;flex-wrap: wrap; justify-content: space-evenly;">
+            
             <button class="ibutton" type="submit" id="button1">Sign Up</button>
 
             <hr class="hr2">
@@ -105,6 +110,7 @@
               <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" height="25" alt="google">
               Google
             </a>
+            
           </div>
 
         </form>
@@ -173,28 +179,31 @@
 
   <script>
 
-    function myfun() {
-
-      var x = document.getElementById("boxx");
-      if (x.style.visibility === "visible") {
-        x.style.visibility = "hidden";
-      }
-      else {
-        x.style.visibility = "visible";
-      }
-
-    }
+ 
     $(document).ready(function () {
+      $('#boxx').hide();
+      alert("Google signIn/SignUp is temporary down !! click OK to continue");
       $(window).keydown(function (event) {
         if (event.keyCode == 13) {
           event.preventDefault();
           return false;
         }
       });
+    
+      
+
+      $('#terms').change(()=>{
+        $('#boxx').slideToggle(200);
+      })
+    
+    
     });
 
 
 
   </script>
+
+
+
 
   <%- include('partials/Footer') %>
